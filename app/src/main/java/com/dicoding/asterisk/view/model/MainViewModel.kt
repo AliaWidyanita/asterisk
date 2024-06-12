@@ -99,4 +99,8 @@ class MainViewModel(
             // Handle failure
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e894b52 (Implement Get Nearby Restaurant and Search)
