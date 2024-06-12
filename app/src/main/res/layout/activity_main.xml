@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.950"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_story"
+        app:layout_constraintTop_toTopOf="@+id/rv_restaurant"
         app:layout_constraintVertical_bias="0.950"
         android:focusable="true"
         android:contentDescription="@string/add_review" />

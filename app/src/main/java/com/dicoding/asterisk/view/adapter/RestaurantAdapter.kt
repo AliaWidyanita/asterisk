@@ -34,11 +34,11 @@ class RestaurantAdapter : PagingDataAdapter<RestaurantItem, RestaurantAdapter.Vi
             holder.bind(user)
         }
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-            intent.putExtra(KEY_DETAIL, user)
-            holder.itemView.context.startActivity(intent)
-        }
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+//            intent.putExtra(KEY_DETAIL, user)
+//            holder.itemView.context.startActivity(intent)
+//        }
     }
 
     companion object {
