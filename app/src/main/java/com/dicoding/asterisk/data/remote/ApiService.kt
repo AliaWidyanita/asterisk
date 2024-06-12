@@ -27,6 +27,13 @@ interface ApiService {
         @Field("password") password: String
     ): Call<LoginResponse>
 
+    @GET("nearby")
+    fun getNearbyRestaurants(
+        @Query("lat") latitude: Double,
+        @Query("lng") longitude: Double,
+//        @Query("radius") radius: Int? = null // Optional parameter, will use default value if not included
+    ): Call<List<RestaurantItem>>
+
 //    @GET("restaurant")
 //    suspend fun getRestaurant(
 //        @Query("page") page: Int = 1,
