@@ -17,18 +17,12 @@ import com.dicoding.asterisk.view.DetailActivity.Companion.KEY_DETAIL
 class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
     private var restaurantList: List<RestaurantItem> = emptyList()
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RestaurantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
     class ViewHolder(private val binding: RestaurantItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(resto: RestaurantItem) {
             binding.tvNameRestaurant.text = resto.name
             binding.tvAddressRestaurant.text = resto.address
             Glide.with(binding.root.context)
-                .load(resto.imageUrl)
+                .load(resto.urlToImage)
                 .into(binding.ivRestaurantPhoto)
 
             itemView.setOnClickListener {
@@ -40,15 +34,19 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
         }
     }
 
-    fun submitList(newRestaurantList: List<RestaurantItem>) {
-        restaurantList = newRestaurantList
-        notifyDataSetChanged()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = RestaurantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
-    override fun getItemCount(): Int = restaurantList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(restaurantList[position])
     }
 
+    override fun getItemCount(): Int = restaurantList.size
 
+    fun submitList(newRestaurantList: List<RestaurantItem>) {
+        restaurantList = newRestaurantList
+        notifyDataSetChanged()
+    }
 }
