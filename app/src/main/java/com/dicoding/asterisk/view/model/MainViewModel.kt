@@ -9,11 +9,16 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dicoding.asterisk.data.local.User
 import com.dicoding.asterisk.data.local.UserRepository
+import com.dicoding.asterisk.data.remote.ApiService
 import com.dicoding.asterisk.data.remote.RestaurantItem
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
     val listRestaurant: LiveData<PagingData<RestaurantItem>> = repository.getRestaurant().cachedIn(viewModelScope)
+
 
     private val _showLoading = MutableLiveData<Boolean>()
     val showLoading : LiveData<Boolean> = _showLoading
@@ -27,4 +32,5 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
             repository.logout()
         }
     }
+
 }
