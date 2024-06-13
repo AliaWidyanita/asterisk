@@ -28,7 +28,8 @@ class MainViewModel(
     private val fusedLocationClient: FusedLocationProviderClient
 ) : ViewModel() {
 
-    val listRestaurant: LiveData<PagingData<RestaurantItem>> = repository.getRestaurant().cachedIn(viewModelScope)
+    val listRestaurant: LiveData<PagingData<RestaurantItem>> =
+        repository.getRestaurant().cachedIn(viewModelScope)
 
 
     private val _restaurants = MutableLiveData<List<RestaurantItem>>()
@@ -46,29 +47,37 @@ class MainViewModel(
             repository.logout()
         }
     }
+
     fun fetchNearbyRestaurants(latitude: Double, longitude: Double) {
         _showLoading.value = true
-        apiService.getNearbyRestaurants(latitude, longitude).enqueue(object : Callback<List<RestaurantItem>> {
-            override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
-                _showLoading.value = false
-                if (response.isSuccessful) {
-                    _restaurants.value = response.body()
-                } else {
+        apiService.getNearbyRestaurants(latitude, longitude)
+            .enqueue(object : Callback<List<RestaurantItem>> {
+                override fun onResponse(
+                    call: Call<List<RestaurantItem>>,
+                    response: Response<List<RestaurantItem>>
+                ) {
+                    _showLoading.value = false
+                    if (response.isSuccessful) {
+                        _restaurants.value = response.body()
+                    } else {
+                        _restaurants.value = emptyList()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<RestaurantItem>>, t: Throwable) {
+                    _showLoading.value = false
                     _restaurants.value = emptyList()
                 }
-            }
-
-            override fun onFailure(call: Call<List<RestaurantItem>>, t: Throwable) {
-                _showLoading.value = false
-                _restaurants.value = emptyList()
-            }
-        })
+            })
     }
 
     fun searchRestaurants(query: String) {
         _showLoading.value = true
         apiService.searchRestaurants(query).enqueue(object : Callback<List<RestaurantItem>> {
-            override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
+            override fun onResponse(
+                call: Call<List<RestaurantItem>>,
+                response: Response<List<RestaurantItem>>
+            ) {
                 _showLoading.value = false
                 if (response.isSuccessful) {
                     _restaurants.value = response.body()
@@ -85,7 +94,11 @@ class MainViewModel(
     }
 
     fun fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
 
@@ -99,8 +112,4 @@ class MainViewModel(
             // Handle failure
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e894b52 (Implement Get Nearby Restaurant and Search)
