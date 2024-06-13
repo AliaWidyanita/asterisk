@@ -46,8 +46,10 @@ class RegisterActivity : AppCompatActivity() {
         }.start()
 
         val title = ObjectAnimator.ofFloat(binding.tvRegisterTitle, View.ALPHA, 1f).setDuration(230)
-        val tvName = ObjectAnimator.ofFloat(binding.tvRegisterName, View.ALPHA, 1f).setDuration(230)
-        val etName = ObjectAnimator.ofFloat(binding.edRegisterName, View.ALPHA, 1f).setDuration(230)
+        val tvUsername = ObjectAnimator.ofFloat(binding.tvRegisterUsername, View.ALPHA, 1f).setDuration(230)
+        val etUsername = ObjectAnimator.ofFloat(binding.edRegisterUsername, View.ALPHA, 1f).setDuration(230)
+        val tvFullName = ObjectAnimator.ofFloat(binding.tvRegisterFullName, View.ALPHA, 1f).setDuration(230)
+        val etFullName = ObjectAnimator.ofFloat(binding.edRegisterFullName, View.ALPHA, 1f).setDuration(230)
         val tvEmail = ObjectAnimator.ofFloat(binding.tvRegisterEmail, View.ALPHA, 1f).setDuration(230)
         val etEmail = ObjectAnimator.ofFloat(binding.edRegisterEmail, View.ALPHA, 1f).setDuration(230)
         val tvPassword = ObjectAnimator.ofFloat(binding.tvRegisterPassword, View.ALPHA, 1f).setDuration(230)
@@ -55,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
         val signup = ObjectAnimator.ofFloat(binding.buttonRegister, View.ALPHA, 1f).setDuration(230)
 
         AnimatorSet().apply {
-            playSequentially(title, tvName, etName, tvEmail, etEmail, tvPassword, etPassword, signup)
+            playSequentially(title, tvUsername, etUsername, tvFullName, etFullName, tvEmail, etEmail, tvPassword, etPassword, signup)
             startDelay = 200
             start()
         }
@@ -63,13 +65,14 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.buttonRegister.setOnClickListener {
-            val name = binding.edRegisterName.text.toString()
+            val username = binding.edRegisterUsername.text.toString()
+            val fullName = binding.edRegisterFullName.text.toString()
             val email = binding.edRegisterEmail.text.toString()
             val password = binding.edRegisterPassword.text.toString()
 
             viewModel.getSession().observe(this@RegisterActivity) { user ->
                 val token = user.token
-                viewModel.postDataRegister(name, email, password, token)
+                viewModel.postDataRegister(email, password, username, fullName, token)
             }
         }
         viewModel.showLoading.observe(this) {

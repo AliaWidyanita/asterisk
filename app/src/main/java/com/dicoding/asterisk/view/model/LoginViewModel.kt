@@ -1,30 +1,25 @@
 package com.dicoding.asterisk.view.model
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.dicoding.asterisk.data.local.User
 import com.dicoding.asterisk.data.local.UserRepository
 import com.dicoding.asterisk.data.remote.ApiConfig
 import com.dicoding.asterisk.data.remote.LoginResponse
-import com.dicoding.asterisk.data.remote.LoginResult
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
-    private val _dataLogin = MutableLiveData<LoginResult?>()
-    val dataLogin : LiveData<LoginResult?> = _dataLogin
+    private val _dataLogin = MutableLiveData<LoginResponse?>()
+    val dataLogin: LiveData<LoginResponse?> = _dataLogin
 
     private val _loginSuccess = MutableLiveData<Boolean>()
-    val loginSuccess : LiveData<Boolean> = _loginSuccess
+    val loginSuccess: LiveData<Boolean> = _loginSuccess
 
     private val _showLoading = MutableLiveData<Boolean>()
-    val showLoading : LiveData<Boolean> = _showLoading
+    val showLoading: LiveData<Boolean> = _showLoading
 
     fun saveSession(user: User) {
         viewModelScope.launch {
@@ -36,28 +31,25 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-    fun postDataLogin(email: String, password: String, token: String) {
+    fun postDataLogin(identifier: String, password: String, token: String) {
         _showLoading.value = true
         viewModelScope.launch {
-            val client = ApiConfig.getApiService(token).login(email, password)
+            val client = ApiConfig.getApiService(token).login(identifier, password)
             client.enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
-                ) {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     _showLoading.value = false
                     if (response.isSuccessful) {
                         val responseDetail = response.body()
                         if (responseDetail != null) {
-                            _dataLogin.value = responseDetail.loginResult
+                            _dataLogin.value = responseDetail
                             _loginSuccess.value = true
-                            Log.d(TAG, "onResponse: ${responseDetail.loginResult?.token}")
                         }
                     } else {
                         _loginSuccess.value = false
                         Log.e(TAG, "onFailure: ${response.message()}")
                     }
                 }
+
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     _showLoading.value = false
                     Log.e(TAG, "onFailure: ${t.message}")

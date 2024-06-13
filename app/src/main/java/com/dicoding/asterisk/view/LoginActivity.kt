@@ -86,9 +86,11 @@ class LoginActivity : AppCompatActivity() {
                 setTitle(getString(R.string.success))
                 setMessage(getString(R.string.login_success))
                 setPositiveButton(getString(R.string.next)) { _, _ ->
-                    val email = binding.edLoginEmail.text.toString()
-                    val token = viewModel.dataLogin.value?.token.toString()
-                    viewModel.saveSession(User(email, token))
+                    val username = viewModel.dataLogin.value?.username ?: ""
+                    val fullName = viewModel.dataLogin.value?.fullName ?: ""
+                    val email = viewModel.dataLogin.value?.email ?: ""
+                    val token = viewModel.dataLogin.value?.token ?: ""
+                    viewModel.saveSession(User(username, fullName, email, token, true))
                     val intent = Intent(context, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
