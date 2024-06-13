@@ -29,6 +29,7 @@ class UserDataStore private constructor(private val dataStore: DataStore<Prefere
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }
+
     }
 
     suspend fun logout() {
