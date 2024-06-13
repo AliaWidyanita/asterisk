@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, initialApiService, fusedLocationClient)).get(MainViewModel::class.java)
 
         viewModel.getSession().observe(this) { user ->
-            if (user.isLoggedIn) { //---> ntar ditambah ! di depan usernya kalo mau cek udah login apa blm
+            if (!user.isLoggedIn) { //---> ntar ditambah ! di depan usernya kalo mau cek udah login apa blm
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             } else {
