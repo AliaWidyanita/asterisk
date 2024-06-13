@@ -9,7 +9,8 @@
     <string name="title_register">Lengkapi data dirimu di bawah ini!</string>
     <string name="title_login">Sudah siap untuk berbagi cerita?</string>
     <string name="message_login">Masukkan dulu datamu!</string>
-    <string name="name">Nama</string>
+    <string name="username">Username</string>
+    <string name="fullname">Nama Lengkap</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="error_password">Password tidak boleh kurang dari 8 karatker!</string>
