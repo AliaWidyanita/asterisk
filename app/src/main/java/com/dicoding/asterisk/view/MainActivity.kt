@@ -50,26 +50,22 @@ class MainActivity : AppCompatActivity() {
         val initialApiService = ApiConfig.getApiService("")
         viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, initialApiService, fusedLocationClient)).get(MainViewModel::class.java)
 
-        adapter = RestaurantAdapter()
-        setupRecyclerView()
-        setupSearchView()
-        checkLocationPermission()
-//        viewModel.getSession().observe(this) { user ->
-//            if (!user.isLoggedIn) {
-//                startActivity(Intent(this, WelcomeActivity::class.java))
-//                finish()
-//            } else {
-//                val token = user.token
-//                val apiService = ApiConfig.getApiService(token)
-//
-//                viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, apiService, fusedLocationClient)).get(MainViewModel::class.java)
-//
-//                adapter = RestaurantAdapter()
-//                setupRecyclerView()
-//                setupSearchView()
-//                checkLocationPermission()
-//            }
-//        }
+        viewModel.getSession().observe(this) { user ->
+            if (user.isLoggedIn) { //---> ntar ditambah ! di depan usernya kalo mau cek udah login apa blm
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                finish()
+            } else {
+                val token = user.token
+                val apiService = ApiConfig.getApiService(token)
+
+                viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, apiService, fusedLocationClient)).get(MainViewModel::class.java)
+
+                adapter = RestaurantAdapter()
+                setupRecyclerView()
+                setupSearchView()
+                checkLocationPermission()
+            }
+        }
 
         viewModel.showLoading.observe(this) {
             showLoading(it)
@@ -111,9 +107,9 @@ class MainActivity : AppCompatActivity() {
         binding.rvRestaurant.addItemDecoration(itemDecoration)
     }
 
-//    private fun moveToAddReviewActivity() {
-//        startActivity(Intent(this, AddReviewActivity::class.java))
-//    }
+    private fun moveToAddReviewActivity() {
+        startActivity(Intent(this, AddReviewActivity::class.java))
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
