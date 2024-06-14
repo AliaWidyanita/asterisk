@@ -12,6 +12,19 @@ import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiService {
+
+    @GET("nearby")
+    fun getNearbyRestaurants(
+        @Query("lat") latitude: Double,
+        @Query("lng") longitude: Double,
+        @Query("radius") radius: Int? = null // Optional parameter, will use default value if not included
+    ): Call<List<RestaurantItem>>
+
+    @GET("search")
+    fun searchRestaurants(
+        @Query("location") location: String
+    ): Call<List<RestaurantItem>>
+
     @FormUrlEncoded
     @POST("register")
     fun register(
@@ -27,6 +40,8 @@ interface ApiService {
         @Field("identifier") identifier: String,
         @Field("password") password: String
     ): Call<LoginResponse>
+
+
 
 //    @GET("restaurant")
 //    suspend fun getRestaurant(
