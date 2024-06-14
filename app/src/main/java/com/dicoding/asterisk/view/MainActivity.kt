@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.restaurants.observe(this) { restaurants ->
             adapter.submitList(restaurants)
         }
-//        binding.fabAdd.setOnClickListener {
-//            moveToAddReviewActivity()
-//        }
+        binding.fabAdd.setOnClickListener {
+            moveToAddReviewActivity()
+        }
     }
 
     private fun setupSearchView() {
