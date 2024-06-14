@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -17,20 +18,22 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupAddReviewButton()
+
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
         } else {
             intent.getParcelableExtra(KEY_DETAIL)
         }
 
-        if (detailRestaurant != null) {
-//            binding.tvNameRestaurant.text = detailRestaurant.name.toString()
-//            binding.tvAddressRestaurant.text = detailRestaurant.address.toString()
-//            Glide.with(this@DetailActivity)
-//                .load(detailRestaurant.photoUrl.toString())
-//                .into(binding.ivPhotoRestaurant)
+        detailRestaurant?.let {
+            binding.tvNameRestaurant.text = it.name
+            binding.tvAddressRestaurant.text = it.address
+            Glide.with(this)
+                .load(it.imageUrl)
+                .into(binding.ivPhotoRestaurant)
+            supportActionBar?.title = getString(R.string.detail_restaurant, it.name)
         }
-        supportActionBar?.title = resources.getString(R.string.detail_restaurant, detailRestaurant?.name.toString())
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -46,5 +49,21 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_DETAIL = "key_detail"
+    }
+    private fun setupAddReviewButton() {
+        val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
+        } else {
+            intent.getParcelableExtra(KEY_DETAIL)
+        }
+
+        detailRestaurant?.let { restaurant ->
+            binding.btnAddReview.setOnClickListener {
+                val intent = Intent(this, AddReviewActivity::class.java)
+                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_NAME, restaurant.name)
+                intent.putExtra(AddReviewActivity.EXTRA_IMAGE_URL, restaurant.imageUrl)
+                startActivity(intent)
+            }
+        }
     }
 }
