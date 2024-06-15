@@ -50,7 +50,7 @@ class MainViewModel(
 
     fun fetchNearbyRestaurants(latitude: Double, longitude: Double) {
         _showLoading.value = true
-        apiService.getNearbyRestaurants(latitude, longitude)
+        apiService.getNearbyRestaurants(latitude, longitude, 10000)
             .enqueue(object : Callback<List<RestaurantItem>> {
                 override fun onResponse(
                     call: Call<List<RestaurantItem>>,
