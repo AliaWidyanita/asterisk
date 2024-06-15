@@ -1,45 +1,20 @@
 package com.dicoding.asterisk.view
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
-import com.dicoding.asterisk.databinding.ActivityAddReviewBinding
-import com.dicoding.asterisk.view.model.AddReviewViewModel
-import com.dicoding.asterisk.view.model.ViewModelFactory
+import com.dicoding.asterisk.databinding.ActivityMyReviewBinding
 
-class AddReviewActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
-        const val EXTRA_IMAGE_URL = "extra_image_url"
-    }
-    private var currentImageUri: Uri? = null
-    private lateinit var token: String
-    private lateinit var binding: ActivityAddReviewBinding
-    private val viewModel by viewModels<AddReviewViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
+class MyReviewActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMyReviewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
-        binding = ActivityAddReviewBinding.inflate(layoutInflater)
+        binding = ActivityMyReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
-        val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
-        binding.tvRestaurantName.text = restaurantName ?: "Unknown Restaurant"
-
-        Glide.with(this)
-            .load(imageUrl)
-            .into(binding.ivRestaurant)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupBottomNavigation()
     }
 

@@ -17,9 +17,10 @@ data class RestaurantItem(
     val imageUrl: String? = null
 ) : Parcelable
 
-data class Restaurant (@field:SerializedName("restaurants")
-                       val articles: List<RestaurantItem?>? = null,
+data class Restaurant (
+    @field:SerializedName("restaurants")
+    val articles: List<RestaurantItem?>? = null,
 
-                       @field:SerializedName("status")
-                       val status: String? = null
+    @field:SerializedName("status")
+    val status: String? = null
 )

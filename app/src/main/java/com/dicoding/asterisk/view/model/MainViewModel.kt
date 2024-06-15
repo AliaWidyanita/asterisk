@@ -42,12 +42,6 @@ class MainViewModel(
         return repository.getSession().asLiveData()
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
-
     fun fetchNearbyRestaurants(latitude: Double, longitude: Double) {
         _showLoading.value = true
         apiService.getNearbyRestaurants(latitude, longitude, 10000)

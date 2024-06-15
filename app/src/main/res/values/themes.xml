@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
-    <style name="Base.Theme.Asterisk" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.Asterisk" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/navy</item> <!-- Primary color -->
+        <item name="colorPrimaryVariant">@color/navy</item> <!-- Variant of the primary color -->
+        <item name="colorOnPrimary">@color/white</item> <!-- Text color on primary -->
+
+        <item name="colorSecondary">@color/blue</item> <!-- Secondary color (subcolor) -->
+        <item name="colorSecondaryVariant">@color/blue</item> <!-- Variant of the secondary color -->
+        <item name="colorOnSecondary">@color/black</item> <!-- Text color on secondary -->
+
+        <!-- Other customizations as needed -->
     </style>
 
-    <style name="Theme.Asterisk" parent="Base.Theme.Asterisk" />
+    <!-- Default theme applied to the entire app -->
+    <style name="Theme.Asterisk" parent="Base.Theme.Asterisk">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/gradient_background</item>
+    </style>
+
 </resources>

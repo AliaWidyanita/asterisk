@@ -20,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -46,6 +47,7 @@ class RegisterActivity : AppCompatActivity() {
         }.start()
 
         val title = ObjectAnimator.ofFloat(binding.tvRegisterTitle, View.ALPHA, 1f).setDuration(230)
+        val message = ObjectAnimator.ofFloat(binding.tvRegisterMessage, View.ALPHA, 1f).setDuration(230)
         val tvUsername = ObjectAnimator.ofFloat(binding.tvRegisterUsername, View.ALPHA, 1f).setDuration(230)
         val etUsername = ObjectAnimator.ofFloat(binding.edRegisterUsername, View.ALPHA, 1f).setDuration(230)
         val tvFullName = ObjectAnimator.ofFloat(binding.tvRegisterFullName, View.ALPHA, 1f).setDuration(230)
@@ -57,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
         val signup = ObjectAnimator.ofFloat(binding.buttonRegister, View.ALPHA, 1f).setDuration(230)
 
         AnimatorSet().apply {
-            playSequentially(title, tvUsername, etUsername, tvFullName, etFullName, tvEmail, etEmail, tvPassword, etPassword, signup)
+            playSequentially(title, message, tvUsername, etUsername, tvFullName, etFullName, tvEmail, etEmail, tvPassword, etPassword, signup)
             startDelay = 200
             start()
         }

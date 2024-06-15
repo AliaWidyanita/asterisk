@@ -23,6 +23,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(AddReviewViewModel::class.java) -> {
                 AddReviewViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
