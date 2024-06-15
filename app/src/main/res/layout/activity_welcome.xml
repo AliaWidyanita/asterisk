@@ -9,13 +9,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="379dp"
+        android:layout_height="192dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_welcome" />
+        app:layout_constraintVertical_bias="0.935"
+        app:srcCompat="@drawable/image_logo_blue" />
 
     <TextView
         android:id="@+id/titleTextView"
@@ -25,6 +26,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:alpha="0"
+        android:gravity="center"
         android:text="@string/title_welcome"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -33,23 +35,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
-        tools:alpha="100" />
-
-    <TextView
-        android:id="@+id/descTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:alpha="0"
-        android:text="@string/message_welcome"
-        android:textColor="@color/navy"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:alpha="100" />
 
     <Button
@@ -64,7 +49,7 @@
         android:text="@string/login"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:alpha="100" />
 
     <Button
@@ -79,7 +64,7 @@
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/descTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:alpha="100" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -88,7 +73,7 @@
         android:layout_height="65dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintGuide_begin="424dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline

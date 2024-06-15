@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val token = user.token
                 val apiService = ApiConfig.getApiService(token)
+                binding.tvName.text = user.fullName + " \uD83D\uDC4B"
 
                 viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, apiService, fusedLocationClient)).get(MainViewModel::class.java)
 
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                 setupRecyclerView()
                 setupSearchView()
                 checkLocationPermission()
+                setupBottomNavigation()
             }
         }
 
@@ -72,9 +75,6 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.restaurants.observe(this) { restaurants ->
             adapter.submitList(restaurants)
-        }
-        binding.fabAdd.setOnClickListener {
-            moveToAddReviewActivity()
         }
     }
 
@@ -107,33 +107,42 @@ class MainActivity : AppCompatActivity() {
         binding.rvRestaurant.addItemDecoration(itemDecoration)
     }
 
-    private fun moveToAddReviewActivity() {
-        startActivity(Intent(this, AddReviewActivity::class.java))
+    private fun moveToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
+    private fun moveToMyReviewActivity() {
+        startActivity(Intent(this, MyReviewActivity::class.java))
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_logout -> {
-                AlertDialog.Builder(this).apply {
-                    setTitle(getString(R.string.logout))
-                    setMessage(getString(R.string.valid_logout))
-                    setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        viewModel.logout()
-                    }
-                    setNegativeButton(getString(R.string.no)) { _, _ ->
-                        return@setNegativeButton
-                    }
-                    create()
-                    show()
+    private fun moveToProfileActivity() {
+        startActivity(Intent(this, ProfileActivity::class.java))
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> {
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24_blue)
+                    moveToMainActivity()
+                    true
                 }
-                true
+
+                R.id.action_review -> {
+                    item.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24_blue)
+                    moveToMyReviewActivity()
+                    true
+                }
+
+                R.id.action_profile -> {
+                    item.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24_blue)
+                    moveToProfileActivity()
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
             }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 

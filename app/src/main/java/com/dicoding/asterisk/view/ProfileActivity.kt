@@ -1,46 +1,66 @@
 package com.dicoding.asterisk.view
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
-import com.dicoding.asterisk.databinding.ActivityAddReviewBinding
-import com.dicoding.asterisk.view.model.AddReviewViewModel
+import com.dicoding.asterisk.databinding.ActivityProfileBinding
+import com.dicoding.asterisk.view.model.ProfileViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
 
-class AddReviewActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
-        const val EXTRA_IMAGE_URL = "extra_image_url"
-    }
-    private var currentImageUri: Uri? = null
-    private lateinit var token: String
-    private lateinit var binding: ActivityAddReviewBinding
-    private val viewModel by viewModels<AddReviewViewModel> {
+class ProfileActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileBinding
+    private val viewModel by viewModels<ProfileViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
-        binding = ActivityAddReviewBinding.inflate(layoutInflater)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
-        val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
-        binding.tvRestaurantName.text = restaurantName ?: "Unknown Restaurant"
+        viewModel.getSession().observe(this@ProfileActivity) { user ->
+            with(binding) {
+                tvProfileName.text = user.fullName
+                tvUserUsername.text = "@" + user.username
+                tvUserFullName.text = user.fullName
+                tvUserEmail.text = user.email
+            }
+        }
 
-        Glide.with(this)
-            .load(imageUrl)
-            .into(binding.ivRestaurant)
+        binding.buttonLogin.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle(getString(R.string.logout))
+                setMessage(getString(R.string.valid_logout))
+                setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    viewModel.logout()
+                    moveToWelcomeActivity()
+                }
+                setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                create()
+                show()
+            }
+        }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        viewModel.showLoading.observe(this){
+            showLoading(it)
+        }
+
         setupBottomNavigation()
+    }
+
+    private fun moveToWelcomeActivity() {
+        val intent = Intent(this, WelcomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun moveToMainActivity() {
@@ -80,5 +100,9 @@ class AddReviewActivity : AppCompatActivity() {
                 else -> super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

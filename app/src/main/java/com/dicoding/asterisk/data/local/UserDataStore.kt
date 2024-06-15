@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.map
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
 class UserDataStore private constructor(private val dataStore: DataStore<Preferences>) {
-
     suspend fun saveSession(user: User) {
         dataStore.edit { preferences ->
             preferences[USERNAME_KEY] = user.username
