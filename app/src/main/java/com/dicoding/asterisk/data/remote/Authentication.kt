@@ -1,7 +1,6 @@
 package com.dicoding.asterisk.data.remote
 
 import com.google.gson.annotations.SerializedName
-
 data class RegisterResponse(
     @field:SerializedName("error")
     val error: Boolean? = null,

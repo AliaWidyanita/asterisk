@@ -4,9 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_logout"
-        android:title="@string/logout"
-        android:icon="@drawable/ic_baseline_logout_24"
-        app:showAsAction="ifRoom">
-    </item>
+        android:id="@+id/action_home"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_review"
+        android:title="My Reviews"
+        android:icon="@drawable/ic_baseline_review_24"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_account_24"
+        app:showAsAction="ifRoom" />
 </menu>

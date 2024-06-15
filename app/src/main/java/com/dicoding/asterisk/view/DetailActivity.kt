@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
 import com.dicoding.asterisk.data.remote.RestaurantItem
@@ -14,6 +15,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,21 +37,48 @@ class DetailActivity : AppCompatActivity() {
             supportActionBar?.title = getString(R.string.detail_restaurant, it.name)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupBottomNavigation()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                return true
+    private fun moveToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    private fun moveToMyReviewActivity() {
+        startActivity(Intent(this, MyReviewActivity::class.java))
+    }
+
+    private fun moveToProfileActivity() {
+        startActivity(Intent(this, ProfileActivity::class.java))
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> {
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24_blue)
+                    moveToMainActivity()
+                    true
+                }
+
+                R.id.action_review -> {
+                    item.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24_blue)
+                    moveToMyReviewActivity()
+                    true
+                }
+
+                R.id.action_profile -> {
+                    item.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24_blue)
+                    moveToProfileActivity()
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 
-    companion object {
-        const val KEY_DETAIL = "key_detail"
-    }
     private fun setupAddReviewButton() {
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
@@ -65,5 +94,9 @@ class DetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+
+    companion object {
+        const val KEY_DETAIL = "key_detail"
     }
 }

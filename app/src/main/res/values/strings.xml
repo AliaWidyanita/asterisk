@@ -3,12 +3,13 @@
 
     <string name="register">Daftar</string>
     <string name="login">Masuk</string>
-    <string name="title_welcome">Selamat Datang di Dicoding Story!</string>
+    <string name="title_welcome">Selamat Datang di Asterisk!</string>
     <string name="message_welcome">Mau berbagi ilmu tentang Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding Story aja!</string>
 
     <string name="title_register">Lengkapi data dirimu di bawah ini!</string>
-    <string name="title_login">Sudah siap untuk berbagi cerita?</string>
-    <string name="message_login">Masukkan dulu datamu!</string>
+    <string name="message_register">Ayo daftar 👋</string>
+    <string name="title_login">Selamat Datang!</string>
+    <string name="message_login">Ayo masuk 👋</string>
     <string name="username">Username</string>
     <string name="fullname">Nama Lengkap</string>
     <string name="email">Email</string>
@@ -17,8 +18,8 @@
     <string name="error_email">Email yang dimasukkan salah!</string>
 
     <string name="success">Berhasil!</string>
-    <string name="register_success">Akun sudah siap. Yuk bagikan ceritamu di Dicoding Story!</string>
-    <string name="login_success">Anda berhasil login. Yuk bagikan ceritamu di Dicoding Story!</string>
+    <string name="register_success">Akun sudah siap. Yuk bagikan reviewmu di Asterisk!</string>
+    <string name="login_success">Anda berhasil login. Yuk bagikan reviewmu di Asterisk!</string>
     <string name="failed">Maaf</string>
     <string name="register_failed">Akun gagal dibuat, silakan daftar ulang.</string>
     <string name="login_failed">Anda gagal login, silakan login ulang.</string>
@@ -34,10 +35,17 @@
     <string name="submit">Submit</string>
     <string name="empty_input">Silakan masukkan review terlebih dahulu.</string>
 
+    <string name="hello">Halo,</string>
     <string name="name_restaurant">Nama Restoran</string>
     <string name="address_restaurant">Lokasi Restoran</string>
     <string name="photo_restaurant">Foto Restoran</string>
     <string name="detail_restaurant">%s</string>
+
+    <string name="title_profile">Profil</string>
+    <string name="username_profile">Username</string>
+    <string name="full_name_profile">Nama Lengkap</string>
+    <string name="email_profile">Email</string>
+    <string name="detail_profile">%s</string>
 
     <string name="retry">Coba lagi</string>
     <string name="timeout">Waktu habis</string>
