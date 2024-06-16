@@ -20,6 +20,7 @@
 
     <TextView
         android:id="@+id/titleTextView"
+        style="@style/TextAppearance.AppCompat.TitleLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -29,8 +30,6 @@
         android:gravity="center"
         android:text="@string/title_welcome"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,12 +44,14 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:alpha="0"
+        tools:alpha="100"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
+        android:textColor="@color/white"
         android:backgroundTint="@color/navy"
         android:text="@string/login"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <Button
         android:id="@+id/button_signup"
@@ -60,12 +61,14 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:alpha="0"
+        tools:alpha="100"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
+        android:textColor="@color/white"
         android:backgroundTint="@color/navy"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        tools:alpha="100" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal"

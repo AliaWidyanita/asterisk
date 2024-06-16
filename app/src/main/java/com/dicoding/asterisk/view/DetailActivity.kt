@@ -20,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        back()
         setupAddReviewButton()
 
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
@@ -33,10 +34,9 @@ class DetailActivity : AppCompatActivity() {
             binding.tvAddressRestaurant.text = it.address
             Glide.with(this)
                 .load(it.imageUrl)
-                .into(binding.ivPhotoRestaurant)
-            supportActionBar?.title = getString(R.string.detail_restaurant, it.name)
+                .into(binding.ivRestaurantPhoto)
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         setupBottomNavigation()
     }
 
@@ -90,10 +90,15 @@ class DetailActivity : AppCompatActivity() {
             binding.btnAddReview.setOnClickListener {
                 val intent = Intent(this, AddReviewActivity::class.java)
                 intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_NAME, restaurant.name)
+                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_ADDRESS, restaurant.address)
                 intent.putExtra(AddReviewActivity.EXTRA_IMAGE_URL, restaurant.imageUrl)
                 startActivity(intent)
             }
         }
+    }
+
+    private fun back() {
+        binding.ivBack.setOnClickListener { finish() }
     }
 
     companion object {

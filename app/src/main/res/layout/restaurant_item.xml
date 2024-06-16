@@ -43,20 +43,19 @@
 
             <TextView
                 android:id="@+id/tv_name_restaurant"
+                style="@style/TextAppearance.AppCompat.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
                 tools:text="@string/name_restaurant" />
 
             <TextView
                 android:id="@+id/tv_address_restaurant"
+                style="@style/TextAppearance.AppCompat.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/white"
-                android:textSize="16sp"
                 tools:text="@string/address_restaurant" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
