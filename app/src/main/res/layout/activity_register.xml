@@ -20,6 +20,7 @@
 
     <TextView
         android:id="@+id/tv_register_title"
+        style="@style/TextAppearance.AppCompat.TitleLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -29,8 +30,6 @@
         tools:alpha="100"
         android:text="@string/title_register"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +37,7 @@
 
     <TextView
         android:id="@+id/tv_register_message"
+        style="@style/TextAppearance.AppCompat.TitleMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -46,7 +46,7 @@
         tools:alpha="100"
         android:text="@string/message_register"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +54,7 @@
 
     <TextView
         android:id="@+id/tv_register_username"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -79,6 +80,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_register_username"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -89,6 +91,7 @@
 
     <TextView
         android:id="@+id/tv_register_full_name"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -114,6 +117,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_register_full_name"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -124,6 +128,7 @@
 
     <TextView
         android:id="@+id/tv_register_email"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -149,6 +154,7 @@
 
         <com.dicoding.asterisk.utils.MyEditText
             android:id="@+id/ed_register_email"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -159,6 +165,7 @@
 
     <TextView
         android:id="@+id/tv_register_password"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -185,6 +192,7 @@
 
         <com.dicoding.asterisk.utils.MyEditText
             android:id="@+id/ed_register_password"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -202,6 +210,8 @@
         android:layout_marginEnd="30dp"
         android:alpha="0"
         tools:alpha="100"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
+        android:textColor="@color/white"
         android:backgroundTint="@color/navy"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"

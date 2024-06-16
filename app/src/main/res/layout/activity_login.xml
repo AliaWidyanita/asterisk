@@ -20,6 +20,7 @@
 
     <TextView
         android:id="@+id/tv_login_title"
+        style="@style/TextAppearance.AppCompat.TitleLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -29,8 +30,6 @@
         tools:alpha="100"
         android:text="@string/title_login"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +37,7 @@
 
     <TextView
         android:id="@+id/tv_login_message"
+        style="@style/TextAppearance.AppCompat.TitleMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -45,8 +45,8 @@
         android:alpha="0"
         tools:alpha="100"
         android:text="@string/message_login"
+        android:textStyle="normal"
         android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +54,7 @@
 
     <TextView
         android:id="@+id/tv_login_email"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -79,6 +80,7 @@
 
         <com.dicoding.asterisk.utils.MyEditText
             android:id="@+id/ed_login_email"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -90,6 +92,7 @@
 
     <TextView
         android:id="@+id/tv_login_password"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -116,6 +119,7 @@
 
         <com.dicoding.asterisk.utils.MyEditText
             android:id="@+id/ed_login_password"
+            style="@style/TextAppearance.AppCompat.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -134,6 +138,8 @@
         android:layout_marginEnd="30dp"
         android:alpha="0"
         tools:alpha="100"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
+        android:textColor="@color/white"
         android:backgroundTint="@color/navy"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"

@@ -11,6 +11,7 @@ class MyReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyReviewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk);
         super.onCreate(savedInstanceState)
         binding = ActivityMyReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
