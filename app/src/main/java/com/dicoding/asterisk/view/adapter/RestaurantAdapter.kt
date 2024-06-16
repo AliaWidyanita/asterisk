@@ -1,12 +1,11 @@
 package com.dicoding.asterisk.view.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.util.Pair
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.data.remote.RestaurantItem
@@ -16,7 +15,6 @@ import com.dicoding.asterisk.view.DetailActivity.Companion.KEY_DETAIL
 
 class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
     private var restaurantList: List<RestaurantItem> = emptyList()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RestaurantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,11 +29,18 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
                 .load(resto.imageUrl)
                 .into(binding.ivRestaurantPhoto)
 
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra(KEY_DETAIL, resto)
-                }
-                itemView.context.startActivity(intent)
+            binding.root.setOnClickListener {
+                val intent = Intent(binding.root.context, DetailActivity::class.java)
+                intent.putExtra(KEY_DETAIL, resto)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        binding.root.context as Activity,
+                        Pair(binding.ivRestaurantPhoto, "photo"),
+                        Pair(binding.tvNameRestaurant, "name"),
+                        Pair(binding.tvAddressRestaurant, "address"),
+                    )
+                binding.root.context.startActivity(intent, optionsCompat.toBundle())
             }
         }
     }
@@ -49,6 +54,4 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(restaurantList[position])
     }
-
-
 }

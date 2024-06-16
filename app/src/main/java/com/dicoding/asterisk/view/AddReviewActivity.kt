@@ -16,8 +16,10 @@ import com.dicoding.asterisk.view.model.ViewModelFactory
 class AddReviewActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
+        const val EXTRA_RESTAURANT_ADDRESS = "extra_restaurant_address"
         const val EXTRA_IMAGE_URL = "extra_image_url"
     }
+
     private var currentImageUri: Uri? = null
     private lateinit var token: String
     private lateinit var binding: ActivityAddReviewBinding
@@ -31,15 +33,18 @@ class AddReviewActivity : AppCompatActivity() {
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
-        val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
-        binding.tvRestaurantName.text = restaurantName ?: "Unknown Restaurant"
+        back()
 
+        val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
+        val restaurantAddress = intent.getStringExtra(EXTRA_RESTAURANT_ADDRESS)
+        val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
+
+        binding.tvNameRestaurant.text = restaurantName ?: "Unknown Restaurant"
+        binding.tvAddressRestaurant.text = restaurantAddress ?: "Unknown Address"
         Glide.with(this)
             .load(imageUrl)
-            .into(binding.ivRestaurant)
+            .into(binding.ivRestaurantPhoto)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupBottomNavigation()
     }
 
@@ -80,5 +85,9 @@ class AddReviewActivity : AppCompatActivity() {
                 else -> super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    private fun back() {
+        binding.ivBack.setOnClickListener { finish() }
     }
 }
