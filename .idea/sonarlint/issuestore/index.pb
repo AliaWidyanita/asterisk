@@ -1,13 +1,25 @@
 
-n
->app/src/main/java/com/dicoding/asterisk/view/DetailActivity.kt,1\2\12837e10b485c2f9d9e72f85ffb2801491b56779
-o
-?app/src/main/java/com/dicoding/asterisk/view/WelcomeActivity.kt,3\0\30745344874ab86a4a4d4d93cbae3826df47ebc0
 C
 settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+p
+@app/src/main/java/com/dicoding/asterisk/view/RegisterActivity.kt,f\d\fd2cb9d0ff79a19bba9e84054109392d50a79f02
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+w
+Gapp/src/main/java/com/dicoding/asterisk/view/model/RegisterViewModel.kt,2\d\2dd00c3c207c19d04e94ca71104b54db1db9098e
 u
 Eapp/src/main/java/com/dicoding/asterisk/data/remote/Authentication.kt,a\a\aa006a7eb4a116100429b21ebdc5c88e29c5c5a4
+{
+Kapp/src/main/java/com/dicoding/asterisk/view/adapter/LoadingStateAdapter.kt,c\f\cf8e2175d04777c98075649a23ed1b91310867ac
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+p
+@app/src/main/java/com/dicoding/asterisk/data/remote/ApiConfig.kt,8\1\815e86b603e6b1fa920e70086cdb2801e0ab2501
+t
+Dapp/src/main/java/com/dicoding/asterisk/view/model/LoginViewModel.kt,1\5\15cce08cf8f140308ca66e9e3435398e700bd148
+z
+Japp/src/main/java/com/dicoding/asterisk/view/model/MainViewModelFactory.kt,8\5\851df74fbf4ec3390eace3133c11bb1ff893c7f8
+s
+Capp/src/main/java/com/dicoding/asterisk/view/model/MainViewModel.kt,0\8\08cb8808ccd42e9825fd440c7aab80118498dbaf

@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
@@ -58,5 +59,11 @@ class UserDataStore private constructor(private val dataStore: DataStore<Prefere
                 instance
             }
         }
+    }
+
+    suspend fun getUserIdOnce(): String {
+        return dataStore.data.map { preferences ->
+            preferences[USERNAME_KEY] ?: ""
+        }.first()
     }
 }

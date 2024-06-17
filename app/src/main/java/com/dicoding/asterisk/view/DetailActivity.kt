@@ -3,16 +3,23 @@ package com.dicoding.asterisk.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
+import com.dicoding.asterisk.data.local.UserDataStore
+import com.dicoding.asterisk.data.local.dataStore
 import com.dicoding.asterisk.data.remote.RestaurantItem
 import com.dicoding.asterisk.databinding.ActivityDetailBinding
+import com.dicoding.asterisk.view.model.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
+
+    private lateinit var userDataStore: UserDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Asterisk);
@@ -20,8 +27,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        back()
-        setupAddReviewButton()
+        userDataStore = UserDataStore.getInstance(this.dataStore)
+
 
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
@@ -29,16 +36,18 @@ class DetailActivity : AppCompatActivity() {
             intent.getParcelableExtra(KEY_DETAIL)
         }
 
-        detailRestaurant?.let {
-            binding.tvNameRestaurant.text = it.name
-            binding.tvAddressRestaurant.text = it.address
-            Glide.with(this)
-                .load(it.imageUrl)
-                .into(binding.ivRestaurantPhoto)
+        detailRestaurant?.let { restaurant ->
+            binding.tvNameRestaurant.text = restaurant.name
+            binding.tvAddressRestaurant.text = restaurant.address
+            Glide.with(this).load(restaurant.imageUrl).into(binding.ivRestaurantPhoto)
+
         }
 
+        setupAddReviewButton()
         setupBottomNavigation()
+        back()
     }
+
 
     private fun moveToMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
@@ -92,6 +101,7 @@ class DetailActivity : AppCompatActivity() {
                 intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_NAME, restaurant.name)
                 intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_ADDRESS, restaurant.address)
                 intent.putExtra(AddReviewActivity.EXTRA_IMAGE_URL, restaurant.imageUrl)
+                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_ID, restaurant.restaurant_id)
                 startActivity(intent)
             }
         }

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -45,6 +46,9 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -68,7 +72,6 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
-    implementation("androidx.room:room-runtime:2.6.1")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -82,4 +85,9 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
 
     implementation ("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation("androidx.room:room-runtime:2.5.1")
+    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
+
 }

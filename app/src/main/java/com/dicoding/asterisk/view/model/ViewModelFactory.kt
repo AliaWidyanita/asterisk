@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.asterisk.data.local.UserRepository
+import com.dicoding.asterisk.data.remote.ApiService
 import com.dicoding.asterisk.utils.Injection
 
 class ViewModelFactory(
     private val repository: UserRepository,
+    private val apiService: ApiService,
     private val context: Context
 ) : ViewModelProvider.NewInstanceFactory() {
 
@@ -21,7 +23,7 @@ class ViewModelFactory(
                 LoginViewModel(repository) as T
             }
             modelClass.isAssignableFrom(AddReviewViewModel::class.java) -> {
-                AddReviewViewModel(repository) as T
+                AddReviewViewModel(apiService) as T
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
@@ -34,11 +36,11 @@ class ViewModelFactory(
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
 
-        @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: ViewModelFactory(
                     Injection.provideRepository(context),
+                    Injection.provideApiService(),
                     context
                 ).also { INSTANCE = it }
             }
