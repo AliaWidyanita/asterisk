@@ -40,6 +40,11 @@ interface ApiService {
         @Field("password") password: String
     ): Call<LoginResponse>
 
+    @FormUrlEncoded
+    @POST("review")
+    fun submitReview(
+        @Field("reviewText") reviewText: String
+    ): Call<ReviewResponse>
 //    @GET("restaurant")
 //    suspend fun getRestaurant(
 //        @Query("page") page: Int = 1,

@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // Initialize viewModel with a dummy token initially
         val initialApiService = ApiConfig.getApiService("")
         viewModel = ViewModelProvider(this, MainViewModelFactory.getInstance(this, initialApiService, fusedLocationClient)).get(MainViewModel::class.java)
 
