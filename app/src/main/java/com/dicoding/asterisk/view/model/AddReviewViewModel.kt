@@ -18,9 +18,9 @@ class AddReviewViewModel(
     private val _showLoading = MutableLiveData<Boolean>()
     val showLoading: LiveData<Boolean> = _showLoading
 
-    fun submitReview(reviewText: String) {
+    fun submitReview(reviewText: String, restaurantId : String, restaurantName : String, restaurantImage : String) {
         _showLoading.value = true
-        apiService.submitReview(reviewText).enqueue(object : Callback<ReviewResponse> {
+        apiService.submitReview(reviewText, restaurantId, restaurantName, restaurantImage).enqueue(object : Callback<ReviewResponse> {
             override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
                 _showLoading.value = false
                 if (response.isSuccessful && response.body() != null) {
