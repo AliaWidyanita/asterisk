@@ -3,21 +3,23 @@ package com.dicoding.asterisk.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
 import com.dicoding.asterisk.data.local.UserDataStore
 import com.dicoding.asterisk.data.local.dataStore
 import com.dicoding.asterisk.data.remote.RestaurantItem
+import com.dicoding.asterisk.data.remote.RestaurantStatisticsResponse
 import com.dicoding.asterisk.databinding.ActivityDetailBinding
+import com.dicoding.asterisk.view.model.DetailViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
-import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var viewModel: DetailViewModel
 
     private lateinit var userDataStore: UserDataStore
 
@@ -28,7 +30,14 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userDataStore = UserDataStore.getInstance(this.dataStore)
+        val viewModelFactory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
+        val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
+        if (restaurantId != null) {
+            viewModel.fetchStatistics(restaurantId)
+            observeStatistics()
+        }
 
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
@@ -46,6 +55,28 @@ class DetailActivity : AppCompatActivity() {
         setupAddReviewButton()
         setupBottomNavigation()
         back()
+    }
+
+    private fun observeStatistics() {
+        viewModel.statistics.observe(this) { stats ->
+            if (stats != null) {
+                displayStatistics(stats)
+            } else {
+                displayDefaultMessage()
+            }
+        }
+    }
+
+    private fun displayStatistics(stats: RestaurantStatisticsResponse) {
+        val statsText = "Food Average: ${stats.foodAvg}\n" +
+                "Ambience Average: ${stats.ambienceAvg}\n" +
+                "Service Average: ${stats.serviceAvg}\n" +
+                "Price Average: ${stats.priceAvg}"
+        binding.tvReviewResult.text = statsText
+    }
+
+    private fun displayDefaultMessage() {
+        binding.tvReviewResult.text = getString(R.string.message_review)
     }
 
 
@@ -113,5 +144,6 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_DETAIL = "key_detail"
+        const val EXTRA_RESTAURANT_ID = "extra_restaurant_id"
     }
 }

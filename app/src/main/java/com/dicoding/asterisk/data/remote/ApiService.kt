@@ -3,13 +3,7 @@ package com.dicoding.asterisk.data.remote
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("nearby")
@@ -45,6 +39,9 @@ interface ApiService {
     fun submitReview(
         @Field("reviewText") reviewText: String
     ): Call<ReviewResponse>
+
+    @POST("statistics")
+    fun getStatistics(@Body authKey: Map<String, String>): Call<List<RestaurantStatisticsResponse>>
 //    @GET("restaurant")
 //    suspend fun getRestaurant(
 //        @Query("page") page: Int = 1,

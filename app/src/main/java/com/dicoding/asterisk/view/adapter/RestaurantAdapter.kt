@@ -32,6 +32,7 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
             binding.root.setOnClickListener {
                 val intent = Intent(binding.root.context, DetailActivity::class.java)
                 intent.putExtra(KEY_DETAIL, resto)
+                intent.putExtra(DetailActivity.EXTRA_RESTAURANT_ID, resto.restaurant_id)
 
                 val optionsCompat: ActivityOptionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
