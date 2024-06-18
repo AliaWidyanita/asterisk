@@ -16,7 +16,6 @@ class UserRepository private constructor(private val userDataStore: UserDataStor
     }
 
     fun getSession(): Flow<User> {
-
         return userDataStore.getSession()
     }
 
