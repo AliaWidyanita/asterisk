@@ -25,13 +25,7 @@ m
 =app/src/main/java/com/dicoding/asterisk/view/LoginActivity.kt,8\d\8d773468a2232193a32f10c91cde76457343c515
 Å
 Q.idea/sonarlint/securityhotspotstore/a/a/aa006a7eb4a116100429b21ebdc5c88e29c5c5a4,c\f\cffabbd97a76f881eb20e9604abae972ea059edf
-q
-Aapp/src/main/java/com/dicoding/asterisk/view/AddReviewActivity.kt,2\9\29dd40949595a407cbaf25f25273481205b0dcb7
 w
 G.idea/sonarlint/issuestore/a/a/aa006a7eb4a116100429b21ebdc5c88e29c5c5a4,5\e\5ef6536f46dd7473ae8759b1f89213a7b3f3f4d1
-x
-Happ/src/main/java/com/dicoding/asterisk/view/model/AddReviewViewModel.kt,4\c\4caf58908f938069a1d38d7340b4130b1af5299c
-D
-app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
 s
 Capp/src/main/java/com/dicoding/asterisk/data/local/UserDataStore.kt,3\0\306b95f8af7225e6a3bd5f43cdc2fb377940da5c
