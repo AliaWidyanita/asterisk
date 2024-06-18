@@ -5,17 +5,17 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/action_home"
-        android:title="Home"
+        android:title="Beranda"
         android:icon="@drawable/ic_baseline_home_24"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_review"
-        android:title="My Reviews"
+        android:title="Ulasan Saya"
         android:icon="@drawable/ic_baseline_review_24"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_profile"
-        android:title="Profile"
+        android:title="Profil"
         android:icon="@drawable/ic_baseline_account_24"
         app:showAsAction="ifRoom" />
 </menu>

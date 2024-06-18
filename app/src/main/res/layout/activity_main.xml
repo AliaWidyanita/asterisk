@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -28,6 +28,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="5dp"
+        tools:text="@string/full_name_profile"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -73,12 +74,12 @@
         android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
+        android:id="@+id/guidelineHorizontal2"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.05"
+        app:layout_constraintGuide_begin="37dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -90,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.980"
-        app:layout_constraintTop_toTopOf="@+id/rv_restaurant"
+        app:layout_constraintTop_toTopOf="parent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

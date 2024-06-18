@@ -42,6 +42,7 @@
     <string name="empty_input">Silakan masukkan ulasan terlebih dahulu.</string>
     <string name="title_detail">Detil</string>
     <string name="title_review">Ulasan</string>
+    <string name="title_my_review">Ulasan Saya</string>
     <string name="subtitle_review">Berikan Ulasan</string>
     <string name="message_review">Belum ada ulasan</string>
     <string name="hint_review">Masukkan ulasan Anda di sini...</string>
