@@ -39,3 +39,20 @@ data class ReviewDetail(
     val sentiment: String,
     val percentage: String
 )
+
+data class RestaurantStatisticsResponse(
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("imageUrl")
+    val imageUrl: String,
+    @SerializedName("foodAvg")
+    val foodAvg: String,
+    @SerializedName("ambienceAvg")
+    val ambienceAvg: String,
+    @SerializedName("serviceAvg")
+    val serviceAvg: String,
+    @SerializedName("priceAvg")
+    val priceAvg: String
+)

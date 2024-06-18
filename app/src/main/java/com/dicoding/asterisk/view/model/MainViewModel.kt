@@ -20,16 +20,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.content.Context
+import com.dicoding.asterisk.data.remote.ReviewDetail
 
 class MainViewModel(
     private val context: Context,
     private val repository: UserRepository,
     private val apiService: ApiService,
-    private val fusedLocationClient: FusedLocationProviderClient
+    private val fusedLocationClient: FusedLocationProviderClient,
 ) : ViewModel() {
 
     val listRestaurant: LiveData<PagingData<RestaurantItem>> =
         repository.getRestaurant().cachedIn(viewModelScope)
+    val restaurantDetails = MutableLiveData<RestaurantItem>()
+    val reviewStatistics = MutableLiveData<ReviewDetail>()
 
 
     private val _restaurants = MutableLiveData<List<RestaurantItem>>()
