@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view.model
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.asterisk.data.remote.ApiService
@@ -10,6 +11,9 @@ import retrofit2.Response
 
 class DetailViewModel(private val apiService: ApiService) : ViewModel() {
     val statistics = MutableLiveData<RestaurantStatisticsResponse>()
+
+    private val _showLoading = MutableLiveData<Boolean>()
+    val showLoading: LiveData<Boolean> = _showLoading
 
     fun fetchStatistics(restaurantId: String) {
         val authKey = mapOf("authenticationKey" to "c74706514d9bb65b3d51501846dbb08784e15d61aa274a54f03c8ab4af953776")

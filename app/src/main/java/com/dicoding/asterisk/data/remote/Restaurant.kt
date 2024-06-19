@@ -20,14 +20,6 @@ data class RestaurantItem(
     val restaurant_id: String? = null
 ) : Parcelable
 
-data class Restaurant (
-    @field:SerializedName("restaurants")
-    val articles: List<RestaurantItem?>? = null,
-
-    @field:SerializedName("status")
-    val status: String? = null
-)
-
 data class ReviewResponse(
     val food: ReviewDetail,
     val ambience: ReviewDetail,

@@ -33,6 +33,7 @@ class AddReviewActivity : AppCompatActivity() {
     private lateinit var userDataStore: UserDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -65,9 +66,9 @@ class AddReviewActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.showLoading.observe(this, { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        })
+        viewModel.showLoading.observe(this){
+            showLoading(it)
+        }
     }
 
     private fun setupListeners() {
@@ -82,5 +83,9 @@ class AddReviewActivity : AppCompatActivity() {
                 Toast.makeText(this, "Review cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

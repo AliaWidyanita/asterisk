@@ -22,6 +22,9 @@ class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
     private val _showLoading = MutableLiveData<Boolean>()
     val showLoading: LiveData<Boolean> = _showLoading
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
+
     fun getSession(): LiveData<User> {
         return repository.getSession().asLiveData()
     }
@@ -40,12 +43,15 @@ class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
                         }
                     } else {
                         _registerSuccess.value = false
-                        Log.e(TAG, "onFailure: ${response.message()}")
+                        _errorMessage.value = response.message()
+                        Log.e(TAG, "onResponse: ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     _showLoading.value = false
+                    _registerSuccess.value = false
+                    _errorMessage.value = "${t.message}"
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
