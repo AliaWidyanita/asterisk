@@ -1,7 +1,9 @@
 package com.dicoding.asterisk.data.remote
+
 import kotlinx.parcelize.Parcelize
 import com.google.gson.annotations.SerializedName
 import android.os.Parcelable
+
 @Parcelize
 data class RestaurantItem(
     @field:SerializedName("name")
@@ -48,6 +50,7 @@ data class RestaurantStatisticsResponse(
     @SerializedName("priceAvg")
     val priceAvg: String
 )
+
 data class RestaurantReview(
     val review: String,
     val imageUrl: String,

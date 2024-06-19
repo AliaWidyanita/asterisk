@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
@@ -21,7 +22,6 @@ import com.dicoding.asterisk.view.model.ViewModelFactory
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
-
     private lateinit var userDataStore: UserDataStore
 
     private val reviewActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -48,10 +48,12 @@ class DetailActivity : AppCompatActivity() {
         if (restaurantId != null) {
             if (source == "myReview") {
                 viewModel.fetchRestaurantDetails(restaurantId)
+                setDetails()
+                binding.btnAddReview.visibility = View.GONE
             } else {
                 viewModel.fetchStatistics(restaurantId)
+                observeStatistics()
             }
-            observeStatistics()
         }
 
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
@@ -66,10 +68,12 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this).load(restaurant.imageUrl).into(binding.ivRestaurantPhoto)
 
         }
+
         val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
         if (imageUrl != null) {
             Glide.with(this).load(imageUrl).into(binding.ivRestaurantPhoto)
         }
+
         val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
         if (restaurantName != null) {
             binding.tvNameRestaurant.text = restaurantName
@@ -83,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
         setupAddReviewButton()
         back()
 
-        viewModel.showLoading.observe(this){
+        viewModel.showLoading.observe(this) {
             showLoading(it)
         }
     }
@@ -98,6 +102,14 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun setDetails() {
+        val restaurantReview = intent.getStringExtra(EXTRA_RESTAURANT_REVIEW)
+        if (restaurantReview != null) {
+            binding.tvReviewResult1.text = restaurantReview
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun displayStatistics(stats: RestaurantStatisticsResponse) {
         val maxRating = 5.0
         val screenWidth = (resources.displayMetrics.widthPixels / 3 * 2)
@@ -160,5 +172,6 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_IMAGE_URL = "extra_image_url"
         const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
         const val EXTRA_RESTAURANT_ADDRESS = "extra_restaurant_address"
+        const val EXTRA_RESTAURANT_REVIEW = "extra_restaurant_review"
     }
 }
