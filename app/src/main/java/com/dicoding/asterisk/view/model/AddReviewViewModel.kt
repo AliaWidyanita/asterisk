@@ -5,7 +5,6 @@ import com.dicoding.asterisk.data.local.User
 import com.dicoding.asterisk.data.local.UserRepository
 import com.dicoding.asterisk.data.remote.ApiService
 import com.dicoding.asterisk.data.remote.ReviewResponse
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,5 +42,4 @@ class AddReviewViewModel(
             }
         })
     }
-
 }

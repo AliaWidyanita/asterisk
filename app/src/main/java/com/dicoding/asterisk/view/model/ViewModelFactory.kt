@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view.model
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,7 @@ class ViewModelFactory(
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
 

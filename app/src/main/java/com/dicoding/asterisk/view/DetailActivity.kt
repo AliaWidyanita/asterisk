@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
@@ -21,7 +22,6 @@ import com.dicoding.asterisk.view.model.ViewModelFactory
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
-
     private lateinit var userDataStore: UserDataStore
 
     private val reviewActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -49,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
             if (source == "myReview") {
                 viewModel.fetchRestaurantDetails(restaurantId)
                 setDetails()
-                binding.btnAddReview.setVisibility(View.GONE)
+                binding.btnAddReview.visibility = View.GONE
             } else {
                 viewModel.fetchStatistics(restaurantId)
                 observeStatistics()
@@ -68,10 +68,12 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this).load(restaurant.imageUrl).into(binding.ivRestaurantPhoto)
 
         }
+
         val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
         if (imageUrl != null) {
             Glide.with(this).load(imageUrl).into(binding.ivRestaurantPhoto)
         }
+
         val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
         if (restaurantName != null) {
             binding.tvNameRestaurant.text = restaurantName
@@ -85,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
         setupAddReviewButton()
         back()
 
-        viewModel.showLoading.observe(this){
+        viewModel.showLoading.observe(this) {
             showLoading(it)
         }
     }
@@ -107,22 +109,21 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun displayStatistics(stats: RestaurantStatisticsResponse) {
         val maxRating = 5.0
-        val screenWidth = resources.displayMetrics.widthPixels
+        val screenWidth = (resources.displayMetrics.widthPixels / 3 * 2)
 
         binding.tvReviewResult1.text = "Food Average: ${stats.foodAvg}"
         binding.tvReviewResult2.text = "Ambience Average: ${stats.ambienceAvg}"
         binding.tvReviewResult3.text = "Service Average: ${stats.serviceAvg}"
         binding.tvReviewResult4.text = "Price Average: ${stats.priceAvg}"
 
-        // Calculate and set the width for each progress bar
         binding.barFood.layoutParams.width = (stats.foodAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barAmbience.layoutParams.width = (stats.ambienceAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barService.layoutParams.width = (stats.serviceAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barPrice.layoutParams.width = (stats.priceAvg.toFloat() / maxRating * screenWidth).toInt()
 
-        // Request layout to apply the changes
         binding.barFood.requestLayout()
         binding.barAmbience.requestLayout()
         binding.barService.requestLayout()

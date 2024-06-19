@@ -9,13 +9,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import com.dicoding.asterisk.data.local.User
 import com.dicoding.asterisk.data.local.UserRepository
 import com.dicoding.asterisk.data.remote.ApiService
 import com.dicoding.asterisk.data.remote.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +23,7 @@ import android.content.Context
 import com.dicoding.asterisk.data.remote.ReviewDetail
 
 class MainViewModel(
-    private val context: Context,
+    @SuppressLint("StaticFieldLeak") private val context: Context,
     private val repository: UserRepository,
     private val apiService: ApiService,
     private val fusedLocationClient: FusedLocationProviderClient,
