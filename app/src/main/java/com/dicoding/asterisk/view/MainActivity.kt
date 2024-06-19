@@ -15,8 +15,11 @@ import com.dicoding.asterisk.view.adapter.RestaurantAdapter
 import com.dicoding.asterisk.view.model.MainViewModel
 import com.dicoding.asterisk.view.model.MainViewModelFactory
 import android.Manifest
+import android.annotation.SuppressLint
+import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.iterator
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.asterisk.data.remote.ApiConfig
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
@@ -113,25 +117,38 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
-                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24_blue)
+                    updateNavIcon(item, R.drawable.ic_baseline_home_24_blue)
                     moveToMainActivity()
-                    true
                 }
 
                 R.id.action_review -> {
-                    item.icon =
-                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24_blue)
+                    updateNavIcon(item, R.drawable.ic_baseline_review_24_blue)
                     moveToMyReviewActivity()
-                    true
                 }
 
                 R.id.action_profile -> {
-                    item.icon =
-                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24_blue)
+                    updateNavIcon(item, R.drawable.ic_baseline_account_24_blue)
                     moveToProfileActivity()
-                    true
                 }
-                else -> super.onOptionsItemSelected(item)
+            }
+            true
+        }
+    }
+
+    private fun updateNavIcon(item: MenuItem, iconResId: Int) {
+        item.icon = ContextCompat.getDrawable(this, iconResId)
+        resetNavIconsExcept(item)
+    }
+
+    private fun resetNavIconsExcept(exceptItem: MenuItem) {
+        val menu = binding.bottomNavigation.menu
+        for (item in menu) {
+            if (item!= exceptItem) {
+                when (item.itemId) {
+                    R.id.action_home -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24)
+                    R.id.action_review -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24)
+                    R.id.action_profile -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24)
+                }
             }
         }
     }
