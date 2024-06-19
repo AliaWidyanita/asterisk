@@ -52,5 +52,6 @@ data class RestaurantReview(
     val review: String,
     val imageUrl: String,
     val name: String,
-    val id: String
+    val id: String,
+    val address : String
 )
