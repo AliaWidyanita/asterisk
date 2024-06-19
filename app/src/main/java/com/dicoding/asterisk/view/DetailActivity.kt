@@ -13,7 +13,6 @@ import com.dicoding.asterisk.R
 import com.dicoding.asterisk.data.local.UserDataStore
 import com.dicoding.asterisk.data.local.dataStore
 import com.dicoding.asterisk.data.remote.RestaurantItem
-import com.dicoding.asterisk.data.remote.RestaurantReview
 import com.dicoding.asterisk.data.remote.RestaurantStatisticsResponse
 import com.dicoding.asterisk.databinding.ActivityDetailBinding
 import com.dicoding.asterisk.view.model.DetailViewModel
@@ -49,12 +48,10 @@ class DetailActivity : AppCompatActivity() {
         if (restaurantId != null) {
             if (source == "myReview") {
                 viewModel.fetchRestaurantDetails(restaurantId)
-                setDetails()
-                binding.btnAddReview.setVisibility(View.GONE)
             } else {
                 viewModel.fetchStatistics(restaurantId)
-                observeStatistics()
             }
+            observeStatistics()
         }
 
         val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
@@ -83,8 +80,8 @@ class DetailActivity : AppCompatActivity() {
             binding.tvAddressRestaurant.text = restaurantAddress
         }
 
-        back()
         setupAddReviewButton()
+        back()
 
         viewModel.showLoading.observe(this){
             showLoading(it)
@@ -101,32 +98,24 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setDetails() {
-        val restaurantReview = intent.getStringExtra(EXTRA_RESTAURANT_REVIEW)
-        if (restaurantReview != null) {
-            binding.tvReviewResult1.text = restaurantReview
-        }
-    }
-
     private fun displayStatistics(stats: RestaurantStatisticsResponse) {
         val maxRating = 5.0
-        val screenWidth = resources.displayMetrics.widthPixels
-            binding.tvReviewResult1.text = "Food Average: ${stats.foodAvg}"
-            binding.tvReviewResult2.text = "Ambience Average: ${stats.ambienceAvg}"
-            binding.tvReviewResult3.text = "Service Average: ${stats.serviceAvg}"
-            binding.tvReviewResult4.text = "Price Average: ${stats.priceAvg}"
+        val screenWidth = (resources.displayMetrics.widthPixels / 3 * 2)
 
-            // Calculate and set the width for each progress bar
-            binding.barFood.layoutParams.width = (stats.foodAvg.toFloat() / maxRating * screenWidth).toInt()
-            binding.barAmbience.layoutParams.width = (stats.ambienceAvg.toFloat() / maxRating * screenWidth).toInt()
-            binding.barService.layoutParams.width = (stats.serviceAvg.toFloat() / maxRating * screenWidth).toInt()
-            binding.barPrice.layoutParams.width = (stats.priceAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.tvReviewResult1.text = "Food Average: ${stats.foodAvg}"
+        binding.tvReviewResult2.text = "Ambience Average: ${stats.ambienceAvg}"
+        binding.tvReviewResult3.text = "Service Average: ${stats.serviceAvg}"
+        binding.tvReviewResult4.text = "Price Average: ${stats.priceAvg}"
 
-            // Request layout to apply the changes
-            binding.barFood.requestLayout()
-            binding.barAmbience.requestLayout()
-            binding.barService.requestLayout()
-            binding.barPrice.requestLayout()
+        binding.barFood.layoutParams.width = (stats.foodAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barAmbience.layoutParams.width = (stats.ambienceAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barService.layoutParams.width = (stats.serviceAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barPrice.layoutParams.width = (stats.priceAvg.toFloat() / maxRating * screenWidth).toInt()
+
+        binding.barFood.requestLayout()
+        binding.barAmbience.requestLayout()
+        binding.barService.requestLayout()
+        binding.barPrice.requestLayout()
     }
 
     private fun displayDefaultMessage() {
@@ -171,6 +160,5 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_IMAGE_URL = "extra_image_url"
         const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
         const val EXTRA_RESTAURANT_ADDRESS = "extra_restaurant_address"
-        const val EXTRA_RESTAURANT_REVIEW = "extra_restaurant_review"
     }
 }
