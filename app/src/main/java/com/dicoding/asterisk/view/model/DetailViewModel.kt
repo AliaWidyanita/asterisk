@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.asterisk.data.remote.ApiService
+import com.dicoding.asterisk.data.remote.RestaurantReview
 import com.dicoding.asterisk.data.remote.RestaurantStatisticsResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,6 +12,7 @@ import retrofit2.Response
 
 class DetailViewModel(private val apiService: ApiService) : ViewModel() {
     val statistics = MutableLiveData<RestaurantStatisticsResponse>()
+    val reviewDetails = MutableLiveData<RestaurantReview>()
 
     private val _showLoading = MutableLiveData<Boolean>()
     val showLoading: LiveData<Boolean> = _showLoading
