@@ -19,7 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Asterisk);
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Asterisk);
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -66,6 +66,10 @@ class DetailActivity : AppCompatActivity() {
         setupAddReviewButton()
         setupBottomNavigation()
         back()
+
+        viewModel.showLoading.observe(this){
+            showLoading(it)
+        }
     }
 
     private fun observeStatistics() {
@@ -147,6 +151,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun back() {
         binding.ivBack.setOnClickListener { finish() }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {
