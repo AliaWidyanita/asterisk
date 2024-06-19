@@ -40,11 +40,18 @@ interface ApiService {
         @Field("reviewText") reviewText: String,
         @Field("restaurant_id") restaurantId: String,
         @Field("restaurant_name") restaurantName: String,
-        @Field("imageUrl") restaurantImage: String
+        @Field("imageUrl") restaurantImage: String,
+        @Field("username") userName: String
+
     ): Call<ReviewResponse>
 
     @POST("statistics")
     fun getStatistics(@Body authKey: Map<String, String>): Call<List<RestaurantStatisticsResponse>>
+    @GET("reviewed")
+    fun getUserReviews(@Query("identifier") identifier: String): Call<List<RestaurantReview>>
+
+    @GET("detail")
+    fun getRestaurantDetails(@Query("resto_id") restoId : String ): Call<RestaurantStatisticsResponse>
 //    @GET("restaurant")
 //    suspend fun getRestaurant(
 //        @Query("page") page: Int = 1,
@@ -57,4 +64,5 @@ interface ApiService {
 //        @Part file: MultipartBody.Part,
 //        @Part("description") description: RequestBody
 //    ): Call<AddReviewResponse>
+
 }
