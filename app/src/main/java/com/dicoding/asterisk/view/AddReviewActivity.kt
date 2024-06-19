@@ -1,7 +1,6 @@
 package com.dicoding.asterisk.view
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,11 +11,8 @@ import com.dicoding.asterisk.databinding.ActivityAddReviewBinding
 import com.dicoding.asterisk.view.model.AddReviewViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
 import com.bumptech.glide.Glide
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.dicoding.asterisk.data.local.UserDataStore
 import com.dicoding.asterisk.data.local.dataStore
-import kotlinx.coroutines.launch
 
 class AddReviewActivity : AppCompatActivity() {
     companion object {

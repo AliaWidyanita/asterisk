@@ -29,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
             restaurantId?.let {
-                viewModel.fetchStatistics(it) // Refresh the restaurant details
+                viewModel.fetchStatistics(it)
             }
         }
     }
@@ -64,7 +64,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
         setupAddReviewButton()
-        setupBottomNavigation()
         back()
 
         viewModel.showLoading.observe(this){
@@ -83,55 +82,35 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun displayStatistics(stats: RestaurantStatisticsResponse) {
-        val statsText = "Food Average: ${stats.foodAvg}\n" +
-                "Ambience Average: ${stats.ambienceAvg}\n" +
-                "Service Average: ${stats.serviceAvg}\n" +
-                "Price Average: ${stats.priceAvg}"
-        binding.tvReviewResult.text = statsText
+        val maxRating = 5.0
+        val screenWidth = resources.displayMetrics.widthPixels
+
+        binding.tvReviewResult1.text = "Food Average: ${stats.foodAvg}"
+        binding.tvReviewResult2.text = "Ambience Average: ${stats.ambienceAvg}"
+        binding.tvReviewResult3.text = "Service Average: ${stats.serviceAvg}"
+        binding.tvReviewResult4.text = "Price Average: ${stats.priceAvg}"
+
+        binding.barFood.layoutParams.width = (stats.foodAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barAmbience.layoutParams.width = (stats.ambienceAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barService.layoutParams.width = (stats.serviceAvg.toFloat() / maxRating * screenWidth).toInt()
+        binding.barPrice.layoutParams.width = (stats.priceAvg.toFloat() / maxRating * screenWidth).toInt()
+
+        binding.barFood.requestLayout()
+        binding.barAmbience.requestLayout()
+        binding.barService.requestLayout()
+        binding.barPrice.requestLayout()
     }
 
     private fun displayDefaultMessage() {
-        binding.tvReviewResult.text = getString(R.string.message_review)
-    }
+        binding.tvReviewResult1.text = getString(R.string.message_review)
+        binding.tvReviewResult2.visibility = View.GONE
+        binding.tvReviewResult3.visibility = View.GONE
+        binding.tvReviewResult4.visibility = View.GONE
 
-
-    private fun moveToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
-    }
-
-    private fun moveToMyReviewActivity() {
-        startActivity(Intent(this, MyReviewActivity::class.java))
-    }
-
-    private fun moveToProfileActivity() {
-        startActivity(Intent(this, ProfileActivity::class.java))
-    }
-
-    private fun setupBottomNavigation() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.action_home -> {
-                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24_blue)
-                    moveToMainActivity()
-                    true
-                }
-
-                R.id.action_review -> {
-                    item.icon =
-                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24_blue)
-                    moveToMyReviewActivity()
-                    true
-                }
-
-                R.id.action_profile -> {
-                    item.icon =
-                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24_blue)
-                    moveToProfileActivity()
-                    true
-                }
-                else -> super.onOptionsItemSelected(item)
-            }
-        }
+        binding.barFood.visibility = View.GONE
+        binding.barAmbience.visibility = View.GONE
+        binding.barService.visibility = View.GONE
+        binding.barPrice.visibility = View.GONE
     }
 
     private fun setupAddReviewButton() {
