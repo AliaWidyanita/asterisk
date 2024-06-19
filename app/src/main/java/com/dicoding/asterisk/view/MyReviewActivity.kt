@@ -37,6 +37,7 @@ class MyReviewActivity : AppCompatActivity() {
                 putExtra(DetailActivity.EXTRA_SOURCE, source)
                 putExtra(DetailActivity.EXTRA_RESTAURANT_NAME, review.name)
                 putExtra(DetailActivity.EXTRA_RESTAURANT_ADDRESS, review.address)
+                putExtra(DetailActivity.EXTRA_RESTAURANT_REVIEW, review.review)
             }
             startActivity(intent)
         }
