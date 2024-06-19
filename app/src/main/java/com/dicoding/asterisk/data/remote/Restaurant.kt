@@ -48,3 +48,9 @@ data class RestaurantStatisticsResponse(
     @SerializedName("priceAvg")
     val priceAvg: String
 )
+data class RestaurantReview(
+    val review: String,
+    val imageUrl: String,
+    val name: String,
+    val id: String
+)

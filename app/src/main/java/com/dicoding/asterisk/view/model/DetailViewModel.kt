@@ -30,4 +30,21 @@ class DetailViewModel(private val apiService: ApiService) : ViewModel() {
             }
         })
     }
+    fun fetchRestaurantDetails(restaurantId: String) {
+        apiService.getRestaurantDetails(restaurantId).enqueue(object : Callback<RestaurantStatisticsResponse> {
+            override fun onResponse(call: Call<RestaurantStatisticsResponse>, response: Response<RestaurantStatisticsResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        statistics.postValue(it)
+                    }
+                } else {
+                    // Handle the case where the response is not successful
+                }
+            }
+
+            override fun onFailure(call: Call<RestaurantStatisticsResponse>, t: Throwable) {
+                // Log error or handle failure case
+            }
+        })
+    }
 }
