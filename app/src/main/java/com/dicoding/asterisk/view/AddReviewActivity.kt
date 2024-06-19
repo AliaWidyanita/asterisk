@@ -82,17 +82,20 @@ class AddReviewActivity : AppCompatActivity() {
             val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
             val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
             val restaurantImage = intent.getStringExtra(EXTRA_IMAGE_URL)
+            val restaurantAdress = intent.getStringExtra(EXTRA_RESTAURANT_ADDRESS)
 
             // Observing the session for the username
             viewModel.getSession().observe(this) { user ->
                 val username = user.username
-                if (reviewText.isNotEmpty() && restaurantId != null && restaurantName != null && restaurantImage != null && username != null) {
+                if (reviewText.isNotEmpty() && restaurantId != null && restaurantName != null && restaurantImage != null && username != null && restaurantAdress != null) {
                     viewModel.submitReview(
                         reviewText,
                         restaurantId,
                         restaurantName,
                         restaurantImage,
-                        username
+                        username,
+                        restaurantAdress
+
                     )
                     Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show()
                 } else {

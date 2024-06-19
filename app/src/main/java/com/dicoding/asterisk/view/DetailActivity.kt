@@ -80,6 +80,11 @@ class DetailActivity : AppCompatActivity() {
             binding.tvNameRestaurant.text = restaurantName
         }
 
+        val restaurantAddress = intent.getStringExtra(EXTRA_RESTAURANT_ADDRESS)
+        if (restaurantAddress != null) {
+            binding.tvAddressRestaurant.text = restaurantAddress
+        }
+
         setupAddReviewButton()
         setupBottomNavigation()
         back()
@@ -197,5 +202,6 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_SOURCE = "extra_source"
         const val EXTRA_IMAGE_URL = "extra_image_url"
         const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
+        const val EXTRA_RESTAURANT_ADDRESS = "extra_restaurant_address"
     }
 }

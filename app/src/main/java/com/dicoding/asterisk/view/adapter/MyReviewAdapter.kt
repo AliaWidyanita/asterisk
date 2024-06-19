@@ -13,6 +13,7 @@ class MyReviewAdapter(private val onClick: (RestaurantReview, String) -> Unit) :
     class ReviewViewHolder(val binding: RestaurantItemBinding, val onClick: (RestaurantReview, String) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(review: RestaurantReview) {
             binding.tvNameRestaurant.text = review.name
+            binding.tvAddressRestaurant.text = review.address
             Glide.with(binding.root.context).load(review.imageUrl).into(binding.ivRestaurantPhoto)
             binding.root.setOnClickListener {
                 onClick(review, "myReview")

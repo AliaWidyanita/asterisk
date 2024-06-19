@@ -25,9 +25,9 @@ class AddReviewViewModel(
         return repository.getSession().asLiveData()
     }
 
-    fun submitReview(reviewText: String, restaurantId : String, restaurantName : String, restaurantImage : String, username : String) {
+    fun submitReview(reviewText: String, restaurantId : String, restaurantName : String, restaurantImage : String, username : String, address : String) {
         _showLoading.value = true
-        apiService.submitReview(reviewText, restaurantId, restaurantName, restaurantImage, username).enqueue(object : Callback<ReviewResponse> {
+        apiService.submitReview(reviewText, restaurantId, restaurantName, restaurantImage, username, address).enqueue(object : Callback<ReviewResponse> {
             override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
                 _showLoading.value = false
                 if (response.isSuccessful && response.body() != null) {
