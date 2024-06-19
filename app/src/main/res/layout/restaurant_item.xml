@@ -47,6 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="@string/name_restaurant" />
 
             <TextView
@@ -56,6 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/white"
+                android:ellipsize="end"
+                android:maxLines="2"
                 tools:text="@string/address_restaurant" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
