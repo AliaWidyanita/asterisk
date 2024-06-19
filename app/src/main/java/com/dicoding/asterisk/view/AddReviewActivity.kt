@@ -1,5 +1,6 @@
 package com.dicoding.asterisk.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -32,6 +33,7 @@ class AddReviewActivity : AppCompatActivity() {
     private lateinit var userDataStore: UserDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,6 +45,7 @@ class AddReviewActivity : AppCompatActivity() {
 
         setupUI(restaurantName, restaurantAddress, imageUrl)
         setupListeners()
+        observeViewModel()
     }
 
     private fun setupUI(restaurantName: String?, restaurantAddress: String?, imageUrl: String?) {
@@ -52,30 +55,37 @@ class AddReviewActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener { finish() }
     }
 
-    private fun setupListeners() {
-        binding.btnSubmitReview.setOnClickListener {
-            val reviewText = binding.etReview.text.toString()
-            val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
-            if (reviewText.isNotEmpty() && restaurantId != null) {
-                lifecycleScope.launch {
-                    viewModel.submitReview(reviewText)
-                }
-            } else {
-                Toast.makeText(this, "Review cannot be empty", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+    private fun observeViewModel() {
         viewModel.reviewResponse.observe(this) { response ->
             if (response != null) {
                 Toast.makeText(this, "Review submitted successfully!", Toast.LENGTH_SHORT).show()
-                // Optionally, navigate away or update UI
+                setResult(Activity.RESULT_OK)
+                finish()
             } else {
                 Toast.makeText(this, "Failed to submit review", Toast.LENGTH_SHORT).show()
             }
         }
 
-//        viewModel.showLoading.observe(this) { isLoading ->
-//            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//        }
+        viewModel.showLoading.observe(this){
+            showLoading(it)
+        }
+    }
+
+    private fun setupListeners() {
+        binding.btnSubmitReview.setOnClickListener {
+            val reviewText = binding.etReview.text.toString()
+            val restaurantId = intent.getStringExtra(AddReviewActivity.EXTRA_RESTAURANT_ID)
+            val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
+            val restaurantImage = intent.getStringExtra(EXTRA_IMAGE_URL)
+            if (reviewText.isNotEmpty() && restaurantId != null && restaurantName != null && restaurantImage != null) {
+                viewModel.submitReview(reviewText, restaurantId, restaurantName, restaurantImage)
+            } else {
+                Toast.makeText(this, "Review cannot be empty", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

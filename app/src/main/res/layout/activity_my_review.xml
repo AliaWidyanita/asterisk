@@ -6,17 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".view.MyReviewActivity">
 
+    <TextView
+        android:id="@+id/iv_my_review_title"
+        style="@style/TextAppearance.AppCompat.TitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy"
+        android:text="@string/title_my_review"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_review"
+        android:id="@+id/rv_restaurant"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/iv_my_review_title"
         app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
@@ -31,12 +44,12 @@
         android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
+        android:id="@+id/guidelineHorizontal2"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.05"
+        app:layout_constraintGuide_begin="37dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.980"
-        app:layout_constraintTop_toTopOf="@+id/rv_review"
+        app:layout_constraintTop_toTopOf="parent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

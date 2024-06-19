@@ -14,13 +14,14 @@ import com.dicoding.asterisk.view.model.RegisterViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
+    private var errorMessage: String? = null
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel by viewModels<RegisterViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Asterisk);
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -80,14 +81,17 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.showLoading.observe(this) {
             showLoading(it)
         }
-        viewModel.registerSuccess.observe(this) { isSuccess->
+        viewModel.errorMessage.observe(this@RegisterActivity) { errorMessage ->
+            this.errorMessage = errorMessage
+        }
+        viewModel.registerSuccess.observe(this@RegisterActivity) { isSuccess ->
             isRegisterSuccess(isSuccess)
         }
     }
 
     private fun isRegisterSuccess(isSuccess: Boolean) {
         if (isSuccess) {
-            AlertDialog.Builder(this).apply {
+            AlertDialog.Builder(this@RegisterActivity).apply {
                 setTitle(getString(R.string.success))
                 setMessage(getString(R.string.register_success))
                 setPositiveButton(getString(R.string.next)) { _, _ ->
@@ -97,9 +101,9 @@ class RegisterActivity : AppCompatActivity() {
                 show()
             }
         } else {
-            AlertDialog.Builder(this).apply {
+            AlertDialog.Builder(this@RegisterActivity).apply {
                 setTitle(getString(R.string.failed))
-                setMessage(getString(R.string.register_failed))
+                setMessage(errorMessage ?: getString(R.string.register_failed))
                 setNegativeButton(getString(R.string.back)) { _, _ ->
                     return@setNegativeButton
                 }

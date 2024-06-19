@@ -1,11 +1,13 @@
 package com.dicoding.asterisk.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dicoding.asterisk.R
@@ -23,8 +25,17 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var userDataStore: UserDataStore
 
+    private val reviewActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
+            restaurantId?.let {
+                viewModel.fetchStatistics(it) // Refresh the restaurant details
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Asterisk);
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,6 +66,10 @@ class DetailActivity : AppCompatActivity() {
         setupAddReviewButton()
         setupBottomNavigation()
         back()
+
+        viewModel.showLoading.observe(this){
+            showLoading(it)
+        }
     }
 
     private fun observeStatistics() {
@@ -120,26 +135,26 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupAddReviewButton() {
-        val detailRestaurant = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(KEY_DETAIL, RestaurantItem::class.java)
-        } else {
-            intent.getParcelableExtra(KEY_DETAIL)
-        }
-
+        val detailRestaurant = intent.getParcelableExtra<RestaurantItem>(KEY_DETAIL)
         detailRestaurant?.let { restaurant ->
             binding.btnAddReview.setOnClickListener {
-                val intent = Intent(this, AddReviewActivity::class.java)
-                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_NAME, restaurant.name)
-                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_ADDRESS, restaurant.address)
-                intent.putExtra(AddReviewActivity.EXTRA_IMAGE_URL, restaurant.imageUrl)
-                intent.putExtra(AddReviewActivity.EXTRA_RESTAURANT_ID, restaurant.restaurant_id)
-                startActivity(intent)
+                val intent = Intent(this, AddReviewActivity::class.java).apply {
+                    putExtra(AddReviewActivity.EXTRA_RESTAURANT_NAME, restaurant.name)
+                    putExtra(AddReviewActivity.EXTRA_RESTAURANT_ADDRESS, restaurant.address)
+                    putExtra(AddReviewActivity.EXTRA_IMAGE_URL, restaurant.imageUrl)
+                    putExtra(AddReviewActivity.EXTRA_RESTAURANT_ID, restaurant.restaurant_id)
+                }
+                reviewActivityLauncher.launch(intent)
             }
         }
     }
 
     private fun back() {
         binding.ivBack.setOnClickListener { finish() }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {
