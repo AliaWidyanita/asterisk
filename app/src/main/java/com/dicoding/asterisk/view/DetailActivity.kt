@@ -100,20 +100,18 @@ class DetailActivity : AppCompatActivity() {
 
     private fun displayStatistics(stats: RestaurantStatisticsResponse) {
         val maxRating = 5.0
-        val screenWidth = resources.displayMetrics.widthPixels
+        val screenWidth = (resources.displayMetrics.widthPixels / 3 * 2)
 
         binding.tvReviewResult1.text = "Food Average: ${stats.foodAvg}"
         binding.tvReviewResult2.text = "Ambience Average: ${stats.ambienceAvg}"
         binding.tvReviewResult3.text = "Service Average: ${stats.serviceAvg}"
         binding.tvReviewResult4.text = "Price Average: ${stats.priceAvg}"
 
-        // Calculate and set the width for each progress bar
         binding.barFood.layoutParams.width = (stats.foodAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barAmbience.layoutParams.width = (stats.ambienceAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barService.layoutParams.width = (stats.serviceAvg.toFloat() / maxRating * screenWidth).toInt()
         binding.barPrice.layoutParams.width = (stats.priceAvg.toFloat() / maxRating * screenWidth).toInt()
 
-        // Request layout to apply the changes
         binding.barFood.requestLayout()
         binding.barAmbience.requestLayout()
         binding.barService.requestLayout()

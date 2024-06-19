@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
-                    tools:text="@string/message_review" />
+                    android:text="@string/message_review" />
 
                 <View
                     android:id="@+id/bar_food"
