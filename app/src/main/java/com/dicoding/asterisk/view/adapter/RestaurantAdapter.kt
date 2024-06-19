@@ -51,6 +51,7 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
         restaurantList = newRestaurantList
         notifyDataSetChanged()
     }
+
     override fun getItemCount(): Int = restaurantList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

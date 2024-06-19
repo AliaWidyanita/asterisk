@@ -13,7 +13,6 @@ object Injection {
     }
 
     fun provideApiService(): ApiService {
-        // Assuming ApiConfig has a method to get an ApiService instance
         return ApiConfig.getApiService("")
     }
 }
