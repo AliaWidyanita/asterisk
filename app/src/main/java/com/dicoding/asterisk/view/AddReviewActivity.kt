@@ -1,6 +1,7 @@
 package com.dicoding.asterisk.view
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,8 +12,16 @@ import com.dicoding.asterisk.databinding.ActivityAddReviewBinding
 import com.dicoding.asterisk.view.model.AddReviewViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
 import com.bumptech.glide.Glide
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dicoding.asterisk.data.local.UserDataStore
 import com.dicoding.asterisk.data.local.dataStore
+import com.dicoding.asterisk.data.remote.ApiConfig
+import com.dicoding.asterisk.view.adapter.RestaurantAdapter
+import com.dicoding.asterisk.view.model.MainViewModel
+import com.dicoding.asterisk.view.model.MainViewModelFactory
+import kotlinx.coroutines.launch
 
 class AddReviewActivity : AppCompatActivity() {
     companion object {
@@ -70,13 +79,32 @@ class AddReviewActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnSubmitReview.setOnClickListener {
             val reviewText = binding.etReview.text.toString()
-            val restaurantId = intent.getStringExtra(AddReviewActivity.EXTRA_RESTAURANT_ID)
+            val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
             val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
             val restaurantImage = intent.getStringExtra(EXTRA_IMAGE_URL)
-            if (reviewText.isNotEmpty() && restaurantId != null && restaurantName != null && restaurantImage != null) {
-                viewModel.submitReview(reviewText, restaurantId, restaurantName, restaurantImage)
-            } else {
-                Toast.makeText(this, "Review cannot be empty", Toast.LENGTH_SHORT).show()
+            val restaurantAdress = intent.getStringExtra(EXTRA_RESTAURANT_ADDRESS)
+
+            // Observing the session for the username
+            viewModel.getSession().observe(this) { user ->
+                val username = user.username
+                if (reviewText.isNotEmpty() && restaurantId != null && restaurantName != null && restaurantImage != null && username != null && restaurantAdress != null) {
+                    viewModel.submitReview(
+                        reviewText,
+                        restaurantId,
+                        restaurantName,
+                        restaurantImage,
+                        username,
+                        restaurantAdress
+
+                    )
+                    Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Review cannot be empty and user must be logged in.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

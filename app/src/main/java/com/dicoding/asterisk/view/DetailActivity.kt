@@ -18,6 +18,10 @@ import com.dicoding.asterisk.data.remote.RestaurantStatisticsResponse
 import com.dicoding.asterisk.databinding.ActivityDetailBinding
 import com.dicoding.asterisk.view.model.DetailViewModel
 import com.dicoding.asterisk.view.model.ViewModelFactory
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -45,8 +49,13 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
         val restaurantId = intent.getStringExtra(EXTRA_RESTAURANT_ID)
+        val source = intent.getStringExtra(EXTRA_SOURCE)
         if (restaurantId != null) {
-            viewModel.fetchStatistics(restaurantId)
+            if (source == "myReview") {
+                viewModel.fetchRestaurantDetails(restaurantId)
+            } else {
+                viewModel.fetchStatistics(restaurantId)
+            }
             observeStatistics()
         }
 
@@ -62,6 +71,19 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this).load(restaurant.imageUrl).into(binding.ivRestaurantPhoto)
 
         }
+        val imageUrl = intent.getStringExtra(EXTRA_IMAGE_URL)
+        if (imageUrl != null) {
+            Glide.with(this).load(imageUrl).into(binding.ivRestaurantPhoto)
+        }
+        val restaurantName = intent.getStringExtra(EXTRA_RESTAURANT_NAME)
+        if (restaurantName != null) {
+            binding.tvNameRestaurant.text = restaurantName
+        }
+
+        val restaurantAddress = intent.getStringExtra(EXTRA_RESTAURANT_ADDRESS)
+        if (restaurantAddress != null) {
+            binding.tvAddressRestaurant.text = restaurantAddress
+        }
 
         setupAddReviewButton()
         back()
@@ -75,6 +97,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel.statistics.observe(this) { stats ->
             if (stats != null) {
                 displayStatistics(stats)
+                setupBarChart(stats)
             } else {
                 displayDefaultMessage()
             }
@@ -99,6 +122,22 @@ class DetailActivity : AppCompatActivity() {
         binding.barAmbience.requestLayout()
         binding.barService.requestLayout()
         binding.barPrice.requestLayout()
+    }
+    private fun setupBarChart(stats: RestaurantStatisticsResponse) {
+        val entries = ArrayList<BarEntry>()
+        entries.add(BarEntry(0f, stats.foodAvg.toFloat()))
+        entries.add(BarEntry(1f, stats.ambienceAvg.toFloat()))
+        entries.add(BarEntry(2f, stats.serviceAvg.toFloat()))
+        entries.add(BarEntry(3f, stats.priceAvg.toFloat()))
+
+        val dataSet = BarDataSet(entries, "Ratings")
+        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+
+        val data = BarData(dataSet)
+        binding.barChart.data = data
+        binding.barChart.description.text = "Review Averages"
+        binding.barChart.animateY(500)
+        binding.barChart.invalidate() // refresh
     }
 
     private fun displayDefaultMessage() {
@@ -139,5 +178,9 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val KEY_DETAIL = "key_detail"
         const val EXTRA_RESTAURANT_ID = "extra_restaurant_id"
+        const val EXTRA_SOURCE = "extra_source"
+        const val EXTRA_IMAGE_URL = "extra_image_url"
+        const val EXTRA_RESTAURANT_NAME = "extra_restaurant_name"
+        const val EXTRA_RESTAURANT_ADDRESS = "extra_restaurant_address"
     }
 }

@@ -2,19 +2,56 @@ package com.dicoding.asterisk.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.asterisk.R
 import com.dicoding.asterisk.databinding.ActivityMyReviewBinding
+import com.dicoding.asterisk.view.adapter.MyReviewAdapter
+import com.dicoding.asterisk.view.adapter.RestaurantAdapter
+import com.dicoding.asterisk.view.model.MainViewModel
+import com.dicoding.asterisk.view.model.MainViewModelFactory
+import com.dicoding.asterisk.view.model.MyReviewViewModel
+import com.dicoding.asterisk.view.model.ViewModelFactory
 
 class MyReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyReviewBinding
+    private lateinit var adapter: MyReviewAdapter
+
+    private val viewModel: MyReviewViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityMyReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapter = MyReviewAdapter { review, source ->
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra(DetailActivity.EXTRA_RESTAURANT_ID, review.id)
+                putExtra(DetailActivity.EXTRA_IMAGE_URL, review.imageUrl)
+                putExtra(DetailActivity.EXTRA_SOURCE, source)
+                putExtra(DetailActivity.EXTRA_RESTAURANT_NAME, review.name)
+                putExtra(DetailActivity.EXTRA_RESTAURANT_ADDRESS, review.address)
+            }
+            startActivity(intent)
+        }
+        binding.rvRestaurant.adapter = adapter
+        binding.rvRestaurant.layoutManager = LinearLayoutManager(this)
+
+        viewModel.reviews.observe(this) {
+            adapter.setReviews(it)
+        }
+
+        viewModel.getSession().observe(this) { user ->
+            user.username?.let {
+                viewModel.fetchUserReviews(it)
+            }
+        }
 
         setupBottomNavigation()
     }
