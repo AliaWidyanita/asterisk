@@ -19,8 +19,6 @@ P
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 o
 ?app/src/main/java/com/dicoding/asterisk/view/WelcomeActivity.kt,3\0\30745344874ab86a4a4d4d93cbae3826df47ebc0
-p
-@app/src/main/java/com/dicoding/asterisk/view/MyReviewActivity.kt,b\1\b103afaae6c8d248098807ed306d0c82619e43f0
 m
 =app/src/main/java/com/dicoding/asterisk/view/LoginActivity.kt,8\d\8d773468a2232193a32f10c91cde76457343c515
 Å
