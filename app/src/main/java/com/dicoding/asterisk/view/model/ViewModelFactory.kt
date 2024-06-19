@@ -23,13 +23,16 @@ class ViewModelFactory(
                 LoginViewModel(repository) as T
             }
             modelClass.isAssignableFrom(AddReviewViewModel::class.java) -> {
-                AddReviewViewModel(apiService) as T
+                AddReviewViewModel(apiService, repository) as T
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(apiService) as T
+            }
+            modelClass.isAssignableFrom(MyReviewViewModel::class.java) -> {
+                MyReviewViewModel(apiService, repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

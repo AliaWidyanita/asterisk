@@ -7,20 +7,12 @@ p
 @app/src/main/java/com/dicoding/asterisk/view/RegisterActivity.kt,f\d\fd2cb9d0ff79a19bba9e84054109392d50a79f02
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
-w
-Gapp/src/main/java/com/dicoding/asterisk/view/model/RegisterViewModel.kt,2\d\2dd00c3c207c19d04e94ca71104b54db1db9098e
-u
-Eapp/src/main/java/com/dicoding/asterisk/data/remote/Authentication.kt,a\a\aa006a7eb4a116100429b21ebdc5c88e29c5c5a4
 {
 Kapp/src/main/java/com/dicoding/asterisk/view/adapter/LoadingStateAdapter.kt,c\f\cf8e2175d04777c98075649a23ed1b91310867ac
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-@
-build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 o
 ?app/src/main/java/com/dicoding/asterisk/view/WelcomeActivity.kt,3\0\30745344874ab86a4a4d4d93cbae3826df47ebc0
-p
-@app/src/main/java/com/dicoding/asterisk/view/MyReviewActivity.kt,b\1\b103afaae6c8d248098807ed306d0c82619e43f0
 m
 =app/src/main/java/com/dicoding/asterisk/view/LoginActivity.kt,8\d\8d773468a2232193a32f10c91cde76457343c515
 Å
@@ -29,3 +21,5 @@ w
 G.idea/sonarlint/issuestore/a/a/aa006a7eb4a116100429b21ebdc5c88e29c5c5a4,5\e\5ef6536f46dd7473ae8759b1f89213a7b3f3f4d1
 s
 Capp/src/main/java/com/dicoding/asterisk/data/local/UserDataStore.kt,3\0\306b95f8af7225e6a3bd5f43cdc2fb377940da5c
+w
+Gapp/src/main/java/com/dicoding/asterisk/utils/RestaurantPagingSource.kt,c\5\c51bb01220721c8d1364d53f4c591efac4b9aff0
