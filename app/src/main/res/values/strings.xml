@@ -1,44 +1,52 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Asterisk</string>
 
-    <string name="register">Daftar</string>
-    <string name="login">Masuk</string>
-    <string name="title_welcome">Selamat Datang di Dicoding Story!</string>
-    <string name="message_welcome">Mau berbagi ilmu tentang Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding Story aja!</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="title_welcome">Welcome to Asterisk!</string>
 
-    <string name="title_register">Lengkapi data dirimu di bawah ini!</string>
-    <string name="title_login">Sudah siap untuk berbagi cerita?</string>
-    <string name="message_login">Masukkan dulu datamu!</string>
-    <string name="name">Nama</string>
+    <string name="title_register">Complete your data below!</string>
+    <string name="message_register">Let\'s register 👋</string>
+    <string name="title_login">Welcome!</string>
+    <string name="message_login">Let\'s login 👋</string>
+    <string name="username">Username</string>
+    <string name="full_name">Full Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="error_password">Password tidak boleh kurang dari 8 karatker!</string>
-    <string name="error_email">Email yang dimasukkan salah!</string>
+    <string name="error_password">Password must not be less than 8 characters!</string>
+    <string name="error_email">Incorrect email entered!</string>
+    <string name="account_register">Don’t have an account?</string>
+    <string name="account_login">Have an account?</string>
 
-    <string name="success">Berhasil!</string>
-    <string name="register_success">Akun sudah siap. Yuk bagikan ceritamu di Dicoding Story!</string>
-    <string name="login_success">Anda berhasil login. Yuk bagikan ceritamu di Dicoding Story!</string>
-    <string name="failed">Maaf</string>
-    <string name="register_failed">Akun gagal dibuat, silakan daftar ulang.</string>
-    <string name="login_failed">Anda gagal login, silakan login ulang.</string>
-    <string name="next">Lanjut</string>
-    <string name="back">Balik</string>
+    <string name="success">Success!</string>
+    <string name="register_success">The account is ready. Come share your review on Asterisk!</string>
+    <string name="login_success">You have successfully logged in. Come share your review on Asterisk!</string>
+    <string name="failed">Sorry...</string>
+    <string name="register_failed">Account creation failed, please re-register.</string>
+    <string name="login_failed">You failed to login, please login again.</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
 
     <string name="logout">Logout</string>
-    <string name="valid_logout">Apakah Anda yakin ingin keluar?</string>
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
+    <string name="valid_logout">Are you sure you want to leave?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
-    <string name="add_review">Tambahkan Review</string>
+    <string name="hello">Hello,</string>
+    <string name="name_restaurant">Restaurant Name</string>
+    <string name="address_restaurant">Restaurant Location</string>
+    <string name="photo_restaurant">Restaurant Photo</string>
+
+    <string name="add_review">Add Review</string>
     <string name="submit">Submit</string>
-    <string name="empty_input">Silakan masukkan review terlebih dahulu.</string>
+    <string name="empty_input">Please enter a review first.</string>
+    <string name="title_detail">Detail</string>
+    <string name="title_review">Review</string>
+    <string name="title_my_review">My Reviews</string>
+    <string name="subtitle_review">Give Review</string>
+    <string name="message_review">There are no reviews yet.</string>
+    <string name="hint_review">Enter your review here...</string>
 
-    <string name="name_restaurant">Nama Restoran</string>
-    <string name="address_restaurant">Lokasi Restoran</string>
-    <string name="photo_restaurant">Foto Restoran</string>
-    <string name="detail_restaurant">%s</string>
-
-    <string name="retry">Coba lagi</string>
-    <string name="timeout">Waktu habis</string>
-    <string name="map_error">Terjadi kesalahan</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_home">Home</string>
 </resources>

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
-        android:id="@+id/action_logout"
-        android:title="@string/logout"
-        android:icon="@drawable/ic_baseline_logout_24"
-        app:showAsAction="ifRoom">
-    </item>
+        android:id="@+id/action_home"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_baseline_home_24" />
+    <item
+        android:id="@+id/action_review"
+        android:title="@string/title_my_review"
+        android:icon="@drawable/ic_baseline_review_24" />
+    <item
+        android:id="@+id/action_profile"
+        android:title="@string/title_profile"
+        android:icon="@drawable/ic_baseline_account_24" />
 </menu>

@@ -17,24 +17,24 @@ import retrofit2.Response
 
 class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
     private val _registerSuccess = MutableLiveData<Boolean>()
-    val registerSuccess : LiveData<Boolean> = _registerSuccess
+    val registerSuccess: LiveData<Boolean> = _registerSuccess
 
     private val _showLoading = MutableLiveData<Boolean>()
-    val showLoading : LiveData<Boolean> = _showLoading
+    val showLoading: LiveData<Boolean> = _showLoading
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
 
     fun getSession(): LiveData<User> {
         return repository.getSession().asLiveData()
     }
 
-    fun postDataRegister(name: String, email: String, password: String, token: String) {
+    fun postDataRegister(email: String, password: String, userName: String, fullName: String, token: String) {
         _showLoading.value = true
         viewModelScope.launch {
-            val client = ApiConfig.getApiService(token).register(name, email, password)
+            val client = ApiConfig.getApiService(token).register(email, password, userName, fullName)
             client.enqueue(object : Callback<RegisterResponse> {
-                override fun onResponse(
-                    call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
-                ) {
+                override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     _showLoading.value = false
                     if (response.isSuccessful) {
                         val responseDetail = response.body()
@@ -43,11 +43,15 @@ class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
                         }
                     } else {
                         _registerSuccess.value = false
-                        Log.e(TAG, "onFailure: ${response.message()}")
+                        _errorMessage.value = response.message()
+                        Log.e(TAG, "onResponse: ${response.message()}")
                     }
                 }
+
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                     _showLoading.value = false
+                    _registerSuccess.value = false
+                    _errorMessage.value = "${t.message}"
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })

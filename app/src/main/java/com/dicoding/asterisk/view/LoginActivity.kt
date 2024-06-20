@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,15 +49,15 @@ class LoginActivity : AppCompatActivity() {
         }.start()
 
         val title = ObjectAnimator.ofFloat(binding.tvLoginTitle, View.ALPHA, 1f).setDuration(230)
+        val message = ObjectAnimator.ofFloat(binding.tvLoginMessage, View.ALPHA, 1f).setDuration(230)
         val tvEmail = ObjectAnimator.ofFloat(binding.tvLoginEmail, View.ALPHA, 1f).setDuration(230)
-        val tvMessageEmail = ObjectAnimator.ofFloat(binding.tvLoginMessage, View.ALPHA, 1f).setDuration(230)
         val etEmail = ObjectAnimator.ofFloat(binding.edLoginEmail, View.ALPHA, 1f).setDuration(230)
         val tvPassword = ObjectAnimator.ofFloat(binding.tvLoginPassword, View.ALPHA, 1f).setDuration(230)
         val etPassword = ObjectAnimator.ofFloat(binding.edLoginPassword, View.ALPHA, 1f).setDuration(230)
         val login = ObjectAnimator.ofFloat(binding.buttonLogin, View.ALPHA, 1f).setDuration(230)
 
         AnimatorSet().apply {
-            playSequentially(title, tvEmail, tvMessageEmail, etEmail, tvPassword, etPassword, login)
+            playSequentially(title, message, tvEmail, etEmail, tvPassword, etPassword, login)
             startDelay = 200
             start()
         }
@@ -72,11 +73,14 @@ class LoginActivity : AppCompatActivity() {
                 viewModel.postDataLogin(email, password, token)
             }
         }
-        viewModel.loginSuccess.observe(this) { isSuccess->
-            isLoginSuccess(isSuccess)
+        binding.tvClickRegister.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
         viewModel.showLoading.observe(this) {
             showLoading(it)
+        }
+        viewModel.loginSuccess.observe(this) { isSuccess->
+            isLoginSuccess(isSuccess)
         }
     }
 
@@ -86,10 +90,12 @@ class LoginActivity : AppCompatActivity() {
                 setTitle(getString(R.string.success))
                 setMessage(getString(R.string.login_success))
                 setPositiveButton(getString(R.string.next)) { _, _ ->
-                    val email = binding.edLoginEmail.text.toString()
-                    val token = viewModel.dataLogin.value?.token.toString()
-                    viewModel.saveSession(User(email, token))
-                    val intent = Intent(context, MainActivity::class.java)
+                    val username = viewModel.dataLogin.value?.username ?: ""
+                    val fullName = viewModel.dataLogin.value?.fullName ?: ""
+                    val email = viewModel.dataLogin.value?.email ?: ""
+                    val token = viewModel.dataLogin.value?.token ?: ""
+                    viewModel.saveSession(User(username, fullName, email, token, true))
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()

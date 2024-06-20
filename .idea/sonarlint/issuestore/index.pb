@@ -1,0 +1,25 @@
+
+C
+settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
+7
+gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
+p
+@app/src/main/java/com/dicoding/asterisk/view/RegisterActivity.kt,f\d\fd2cb9d0ff79a19bba9e84054109392d50a79f02
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+{
+Kapp/src/main/java/com/dicoding/asterisk/view/adapter/LoadingStateAdapter.kt,c\f\cf8e2175d04777c98075649a23ed1b91310867ac
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+o
+?app/src/main/java/com/dicoding/asterisk/view/WelcomeActivity.kt,3\0\30745344874ab86a4a4d4d93cbae3826df47ebc0
+m
+=app/src/main/java/com/dicoding/asterisk/view/LoginActivity.kt,8\d\8d773468a2232193a32f10c91cde76457343c515
+Å
+Q.idea/sonarlint/securityhotspotstore/a/a/aa006a7eb4a116100429b21ebdc5c88e29c5c5a4,c\f\cffabbd97a76f881eb20e9604abae972ea059edf
+w
+G.idea/sonarlint/issuestore/a/a/aa006a7eb4a116100429b21ebdc5c88e29c5c5a4,5\e\5ef6536f46dd7473ae8759b1f89213a7b3f3f4d1
+s
+Capp/src/main/java/com/dicoding/asterisk/data/local/UserDataStore.kt,3\0\306b95f8af7225e6a3bd5f43cdc2fb377940da5c
+w
+Gapp/src/main/java/com/dicoding/asterisk/utils/RestaurantPagingSource.kt,c\5\c51bb01220721c8d1364d53f4c591efac4b9aff0

@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.asterisk.R
 import com.dicoding.asterisk.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Asterisk)
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -47,14 +49,13 @@ class WelcomeActivity : AppCompatActivity() {
         val login = ObjectAnimator.ofFloat(binding.buttonLogin, View.ALPHA, 1f).setDuration(500)
         val signup = ObjectAnimator.ofFloat(binding.buttonSignup, View.ALPHA, 1f).setDuration(500)
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(500)
-        val desc = ObjectAnimator.ofFloat(binding.descTextView, View.ALPHA, 1f).setDuration(500)
 
         val together = AnimatorSet().apply {
             playTogether(login, signup)
         }
 
         AnimatorSet().apply {
-            playSequentially(title, desc, together)
+            playSequentially(title, together)
             start()
         }
     }
