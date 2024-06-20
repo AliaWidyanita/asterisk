@@ -55,9 +55,10 @@ class LoginActivity : AppCompatActivity() {
         val tvPassword = ObjectAnimator.ofFloat(binding.tvLoginPassword, View.ALPHA, 1f).setDuration(230)
         val etPassword = ObjectAnimator.ofFloat(binding.edLoginPassword, View.ALPHA, 1f).setDuration(230)
         val login = ObjectAnimator.ofFloat(binding.buttonLogin, View.ALPHA, 1f).setDuration(230)
+        val layout = ObjectAnimator.ofFloat(binding.linearLayoutRegister, View.ALPHA, 1f).setDuration(230)
 
         AnimatorSet().apply {
-            playSequentially(title, message, tvEmail, etEmail, tvPassword, etPassword, login)
+            playSequentially(title, message, tvEmail, etEmail, tvPassword, etPassword, login, layout)
             startDelay = 200
             start()
         }
