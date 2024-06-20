@@ -4,16 +4,16 @@
 ## Repository of Asterisk Mobile Development
 ![AsteriskDesign](https://github.com/C241-PS383/asterisk-android/blob/master/assets/asterisk_design.png)
 
-## Figma Design
-<p>
-    <a href="https://www.figma.com/proto/o7y8DTBUnW0EyDPdvch7x4/Capstone%3A-Asterisk?node-id=610-2994&t=j6dmF6cNbH8sm1UX-1"><img alt="Figma Design" src="https://img.shields.io/badge/figma-%23F24E1E?style=for-the-badge&logo=figma&logoColor=white"></a>
-</p>
-
 ## User Flow
 ![AsteriskUserFlow](https://github.com/C241-PS383/asterisk-android/blob/master/assets/user_flow.png)
 
 ## Android Architecture
 ![AsteriskAndroidArchitecture](https://github.com/C241-PS383/asterisk-android/blob/master/assets/android_architecture.png)
+
+## Figma Design
+<p>
+    <a href="https://www.figma.com/proto/o7y8DTBUnW0EyDPdvch7x4/Capstone%3A-Asterisk?node-id=610-2994&t=j6dmF6cNbH8sm1UX-1"><img alt="Figma Design" src="https://img.shields.io/badge/figma-%23F24E1E?style=for-the-badge&logo=figma&logoColor=white"></a>
+</p>
 
 ## Tech Stack
 <p>
