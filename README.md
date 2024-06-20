@@ -1,5 +1,5 @@
 # Asterisk
-[![Github Release](https://github.com/C241-PS383/asterisk-android/blob/master/.github/workflows/release.yml/badge.svg?branch=main)](https://github.com/C241-PS383/asterisk-android/blob/master/.github/workflows/release.yml)
+[![Github Release](https://github.com/C241-PS383/asterisk-android/actions/workflows/release.yml/badge.svg?branch=master)](https://github.com/C241-PS383/asterisk-android/actions/workflows/release.yml)
 
 ## Repository of Asterisk Mobile Development
 ![AsteriskDesign](https://github.com/C241-PS383/asterisk-android/blob/master/assets/asterisk_design.png)
