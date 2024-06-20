@@ -1,0 +1,28 @@
+name: Github Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  releases:
+    name: Build and Release APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4.1.7
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: Asterisk.apk
+          path: app/release/app-release.apk
