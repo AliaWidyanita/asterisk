@@ -59,9 +59,10 @@ class RegisterActivity : AppCompatActivity() {
         val tvPassword = ObjectAnimator.ofFloat(binding.tvRegisterPassword, View.ALPHA, 1f).setDuration(230)
         val etPassword = ObjectAnimator.ofFloat(binding.edRegisterPassword, View.ALPHA, 1f).setDuration(230)
         val signup = ObjectAnimator.ofFloat(binding.buttonRegister, View.ALPHA, 1f).setDuration(230)
+        val layout = ObjectAnimator.ofFloat(binding.linearLayoutLogin, View.ALPHA, 1f).setDuration(230)
 
         AnimatorSet().apply {
-            playSequentially(title, message, tvUsername, etUsername, tvFullName, etFullName, tvEmail, etEmail, tvPassword, etPassword, signup)
+            playSequentially(title, message, tvUsername, etUsername, tvFullName, etFullName, tvEmail, etEmail, tvPassword, etPassword, signup, layout)
             startDelay = 200
             start()
         }
