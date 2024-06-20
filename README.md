@@ -2,7 +2,7 @@
 [![Github Release]()]()
 
 ## Repository of Asterisk Mobile Development
-![AsteriskDesign](https://github.com/C241-PS383/asterisk-android/assets/asterisk_design.png)
+![AsteriskDesign](https://github.com/C241-PS383/asterisk-android/blob/master/assets/asterisk_design.png)
 
 ## Figma Design
 <p>
@@ -10,10 +10,10 @@
 </p>
 
 ## User Flow
-![AsteriskUserFlow](https://github.com/C241-PS383/asterisk-android/assets/user_flow.png)
+![AsteriskUserFlow](https://github.com/C241-PS383/asterisk-android/blob/master/assets/user_flow.png)
 
 ## Android Architecture
-![AsteriskAndroidArchitecture](https://github.com/C241-PS383/asterisk-android/assets/android_architecture.png)
+![AsteriskAndroidArchitecture](https://github.com/C241-PS383/asterisk-android/blob/master/assets/android_architecture.png)
 
 ## Tech Stack
 <p>
