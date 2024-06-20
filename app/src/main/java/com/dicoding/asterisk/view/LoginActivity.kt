@@ -73,11 +73,14 @@ class LoginActivity : AppCompatActivity() {
                 viewModel.postDataLogin(email, password, token)
             }
         }
-        viewModel.loginSuccess.observe(this) { isSuccess->
-            isLoginSuccess(isSuccess)
+        binding.tvClickRegister.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
         viewModel.showLoading.observe(this) {
             showLoading(it)
+        }
+        viewModel.loginSuccess.observe(this) { isSuccess->
+            isLoginSuccess(isSuccess)
         }
     }
 

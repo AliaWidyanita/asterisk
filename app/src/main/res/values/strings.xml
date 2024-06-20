@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Asterisk</string>
 
     <string name="register">Register</string>
@@ -15,6 +15,8 @@
     <string name="password">Password</string>
     <string name="error_password">Password must not be less than 8 characters!</string>
     <string name="error_email">Incorrect email entered!</string>
+    <string name="account_register">Don’t have an account?</string>
+    <string name="account_login">Have an account?</string>
 
     <string name="success">Success!</string>
     <string name="register_success">The account is ready. Come share your review on Asterisk!</string>

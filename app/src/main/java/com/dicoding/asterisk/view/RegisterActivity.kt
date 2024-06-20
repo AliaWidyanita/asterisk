@@ -2,6 +2,7 @@ package com.dicoding.asterisk.view
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
@@ -77,6 +78,9 @@ class RegisterActivity : AppCompatActivity() {
                 val token = user.token
                 viewModel.postDataRegister(email, password, username, fullName, token)
             }
+        }
+        binding.tvClickLogin.setOnClickListener {
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
         }
         viewModel.showLoading.observe(this) {
             showLoading(it)

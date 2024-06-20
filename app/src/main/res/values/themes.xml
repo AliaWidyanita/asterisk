@@ -3,16 +3,15 @@
 
     <!-- Base application theme. -->
     <style name="Base.Theme.Asterisk" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/navy</item> <!-- Primary color -->
-        <item name="colorPrimaryVariant">@color/navy</item> <!-- Variant of the primary color -->
-        <item name="colorOnPrimary">@color/white</item> <!-- Text color on primary -->
+        <!-- Primary color -->
+        <item name="colorPrimary">@color/navy</item>
+        <item name="colorPrimaryVariant">@color/navy</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-        <item name="colorSecondary">@color/blue</item> <!-- Secondary color (subcolor) -->
-        <item name="colorSecondaryVariant">@color/blue</item> <!-- Variant of the secondary color -->
-        <item name="colorOnSecondary">@color/black</item> <!-- Text color on secondary -->
-
-        <!-- Other customizations as needed -->
+        <!-- Secondary color -->
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 
     <!-- Default theme applied to the entire app -->
@@ -21,10 +20,11 @@
     </style>
 
     <!-- Splash screen theme -->
-    <style name="Theme.Splash" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/gradient_background</item>
+    <style name="Theme.Splash" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
+    <!-- Text style -->
     <style name="TextAppearance.AppCompat.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
         <item name="fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">57sp</item>
