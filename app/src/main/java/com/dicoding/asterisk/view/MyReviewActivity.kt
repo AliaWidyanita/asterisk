@@ -60,39 +60,20 @@ class MyReviewActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
-                    updateNavIcon(item, R.drawable.ic_baseline_home_24_blue)
                     moveToMainActivity()
+                    true
                 }
-
                 R.id.action_review -> {
-                    updateNavIcon(item, R.drawable.ic_baseline_review_24_blue)
                     moveToMyReviewActivity()
+                    true
                 }
-
                 R.id.action_profile -> {
-                    updateNavIcon(item, R.drawable.ic_baseline_account_24_blue)
                     moveToProfileActivity()
+                    true
                 }
-            }
-            true
-        }
-    }
-
-    private fun updateNavIcon(item: MenuItem, iconResId: Int) {
-        item.icon = ContextCompat.getDrawable(this, iconResId)
-        resetNavIconsExcept(item)
-    }
-
-    private fun resetNavIconsExcept(exceptItem: MenuItem) {
-        val menu = binding.bottomNavigation.menu
-        for (item in menu) {
-            if (item!= exceptItem) {
-                when (item.itemId) {
-                    R.id.action_home -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_home_24)
-                    R.id.action_review -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_review_24)
-                    R.id.action_profile -> item.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_account_24)
-                }
+                else -> false
             }
         }
+        binding.bottomNavigation.menu.findItem(R.id.action_review).isChecked = true
     }
 }

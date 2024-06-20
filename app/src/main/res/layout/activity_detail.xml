@@ -121,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/gray"
                     android:text="@string/message_review" />
 
                 <View
@@ -139,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/gray"
                     tools:text="@string/message_review" />
 
                 <View
@@ -157,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/gray"
                     tools:text="@string/message_review" />
 
                 <View
@@ -175,6 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/gray"
                     tools:text="@string/message_review" />
 
                 <View
@@ -184,6 +188,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@color/navy" />
             </LinearLayout>
 
@@ -197,11 +202,6 @@
                 android:text="@string/add_review"
                 style="@style/TextAppearance.AppCompat.BodyLarge"
                 android:layout_gravity="center_horizontal" />
-
-            <TextView
-                style="@style/TextAppearance.AppCompat.BodyMedium"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
         </LinearLayout>
     </ScrollView>
 
