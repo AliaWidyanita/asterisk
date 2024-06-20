@@ -32,13 +32,12 @@ class AddReviewViewModel(
                 if (response.isSuccessful && response.body() != null) {
                     _reviewResponse.value = response.body()
                 } else {
-                    _reviewResponse.value = null
+                    // add error message
                 }
             }
 
             override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
                 _showLoading.value = false
-                _reviewResponse.value = null
             }
         })
     }
