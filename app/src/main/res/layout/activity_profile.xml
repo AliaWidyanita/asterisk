@@ -136,15 +136,14 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="150dp"
-        style="@style/TextAppearance.AppCompat.BodyLarge"
         android:textColor="@color/white"
         android:backgroundTint="@color/navy"
         android:text="@string/logout"
+        style="@style/TextAppearance.AppCompat.BodyLarge"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_email" />
