@@ -33,3 +33,24 @@ jobs:
         with:
           name: Asterisk.apk
           path: app/build/outputs/apk/release/app-release.apk
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: v1.0.2
+          release_name: Release v1.0.2
+          draft: false
+          prerelease: false
+
+      - name: Upload Release APK to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/release/app-release.apk
+          asset_name: Nest.apk
+          asset_content_type: application/vnd.android.package-archive
